@@ -22,4 +22,28 @@ mybatis:
   configuration:
     map-underscore-to-camel-case: true
 
+#pagehelper分页插件配置
+pagehelper:
+  helperDialect: mysql
+
+---
+spring:
+  profiles: uat
+server:
+  port: 9250
+  servlet:
+    context-path: /v2
+---
+spring:
+  profiles: dev
+server:
+  port: 9250
+  servlet:
+    context-path: /v3
+---
+spring:
+  profiles: prod
+server:
+  port: 19025
+
 
