@@ -18,5 +18,6 @@ public class User {
     private String userName;
     private String password;
     private Date createTime;
+    private Date updateTime;
     private Date lastLoginTime;
 }
