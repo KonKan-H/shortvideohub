@@ -13,4 +13,8 @@
         insert into sv_user (mobile_phone, user_name, password, create_time)
         values (#{user.mobilePhone}, #{user.userName}, #{user.password}, #{user.createTime})
     </insert>
+    <!-- 验证用户 -->
+    <select id="checkUser" resultType="int">
+        select * from sv_user where mobile_phone = #{user.mobilePhone} and password = #{user.password}
+    </select>
 </mapper>

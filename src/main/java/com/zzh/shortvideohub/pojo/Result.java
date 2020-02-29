@@ -3,7 +3,6 @@ package com.zzh.shortvideohub.pojo;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
 
 /**
  * @author zzh
