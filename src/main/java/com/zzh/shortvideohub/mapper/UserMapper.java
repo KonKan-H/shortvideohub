@@ -25,7 +25,7 @@ public interface UserMapper {
      * @param user
      * @return
      */
-    int registerUser(@Param("user") User user);
+    User registerUser(@Param("user") User user);
 
     /**
      * 验证用户

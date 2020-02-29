@@ -35,7 +35,7 @@ public class UserService implements IUserService {
         user.setCreateTime(new Date());
         String un = user.getMobilePhone();
         user.setUserName(un.substring(0,3) + "****" + un.substring(7, 11));
-        int result = userMapper.registerUser(user);
+        u = userMapper.registerUser(user);
         log.info("用户" + user.getMobilePhone() + "于" + new Date() + "注册");
         return 1;
     }
