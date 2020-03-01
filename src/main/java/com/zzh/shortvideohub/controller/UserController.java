@@ -40,7 +40,7 @@ public class UserController {
      * @return
      */
     @RequestMapping(value = "/v1/login/api", method = RequestMethod.POST)
-    private Result<User> userLogin(User user) {
+    private Result<User> userLogin(@RequestBody User user) {
         User u = userService.userLogin(user);
         if(u == null) {
             return new Result<User>(-1, null, "用户名或密码错误");

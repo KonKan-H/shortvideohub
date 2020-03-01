@@ -13,7 +13,7 @@ import java.util.Date;
 @Data
 @RequiredArgsConstructor
 public class User {
-    private int id;
+    private Integer id;
     private String mobilePhone;
     private String userName;
     private String password;

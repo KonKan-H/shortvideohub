@@ -48,7 +48,7 @@ public class UserService implements IUserService {
     @Override
     public User userLogin(User user) {
         User u = userMapper.getUserByMP(user);
-        if(u.getMobilePhone().equals(user.getMobilePhone()) && u.getPassword().equals(user.getPassword())) {
+        if(u != null && u.getMobilePhone().equals(user.getMobilePhone()) && u.getPassword().equals(user.getPassword())) {
             return u;
         }
         return null;
