@@ -16,6 +16,7 @@ public class User {
     private Integer id;
     private String mobilePhone;
     private String userName;
+    private String userAvatar;
     private String password;
     private Date createTime;
     private Date updateTime;
