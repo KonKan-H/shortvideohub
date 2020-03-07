@@ -10,13 +10,24 @@
     </select>
 
     <!-- 注册用户 -->
-    <insert id="registerUser" useGeneratedKeys="true" keyProperty="id" parameterType="com.zzh.shortvideohub.pojo.User">
+    <insert id="insertUser" keyProperty="id" useGeneratedKeys="true" keyColumn="id">
         insert into sv_user (mobile_phone, user_name, password, create_time)
-        values (#{user.mobilePhone}, #{user.userName}, #{user.password}, #{user.createTime})
+        values (#{mobilePhone}, #{userName}, #{password}, #{createTime})
     </insert>
 
     <!-- 验证用户 -->
     <select id="checkUser" resultType="int">
         select * from sv_user where mobile_phone = #{user.mobilePhone} and password = #{user.password}
     </select>
+
+    <!-- 创建默认用户信息 -->
+    <insert id="insertUserInfo">
+        insert into user_info (user_id, user_name) values(#{user.id}, #{user.userName});
+    </insert>
+
+    <!-- 取得用户具体信息 -->
+    <select id="getUserInfo" resultType="com.zzh.shortvideohub.pojo.UserInfo">
+        select * from user_info where user_id = #{user.id};
+    </select>
+
 </mapper>

@@ -3,6 +3,7 @@ package com.zzh.shortvideohub.controller;
 import com.zzh.shortvideohub.mapper.UserMapper;
 import com.zzh.shortvideohub.pojo.Result;
 import com.zzh.shortvideohub.pojo.User;
+import com.zzh.shortvideohub.pojo.UserInfo;
 import com.zzh.shortvideohub.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +30,7 @@ public class UserController {
     private Result<Integer> registration(@RequestBody User user) throws NoSuchAlgorithmException {
         Integer row = userService.registerUser(user);
         if(row == 1) {
-            return new Result<Integer>(1, 1, "注册成功，返回注册页面注册");
+            return new Result<Integer>(1, 1, "注册成功，返回登录页面登录");
         }
         return new Result<Integer>(1, 0, "该手机号已经被注册");
     }
@@ -40,11 +41,11 @@ public class UserController {
      * @return
      */
     @RequestMapping(value = "/v1/login/api", method = RequestMethod.POST)
-    private Result<User> userLogin(@RequestBody User user) {
-        User u = userService.userLogin(user);
+    private Result<UserInfo> userLogin(@RequestBody User user) {
+        UserInfo u = userService.userLogin(user);
         if(u == null) {
-            return new Result<User>(-1, null, "用户名或密码错误");
+            return new Result<UserInfo>(-1, null, "用户名或密码错误");
         }
-        return new Result<User>(1, u, "登录成功");
+        return new Result<UserInfo>(1, u, "登录成功");
     }
 }

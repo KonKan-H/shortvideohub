@@ -21,6 +21,10 @@ public class Video {
     private Date createTime;
     private String url;
     /**
+     * 视频封面
+     */
+    private String cover;
+    /**
      * 描述
      */
     private String description;

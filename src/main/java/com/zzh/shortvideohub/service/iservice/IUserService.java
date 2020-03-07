@@ -2,6 +2,7 @@ package com.zzh.shortvideohub.service.iservice;
 
 import com.zzh.shortvideohub.pojo.Result;
 import com.zzh.shortvideohub.pojo.User;
+import com.zzh.shortvideohub.pojo.UserInfo;
 
 import java.security.NoSuchAlgorithmException;
 
@@ -23,5 +24,5 @@ public interface IUserService {
      * @param user
      * @return
      */
-    User userLogin(User user);
+    UserInfo userLogin(User user);
 }

@@ -1,19 +1,16 @@
 package com.zzh.shortvideohub.service;
 
 import com.zzh.shortvideohub.mapper.UserMapper;
-import com.zzh.shortvideohub.pojo.Result;
 import com.zzh.shortvideohub.pojo.User;
+import com.zzh.shortvideohub.pojo.UserInfo;
 import com.zzh.shortvideohub.service.iservice.IUserService;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.ibatis.annotations.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import java.io.UnsupportedEncodingException;
-import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Date;
-import java.util.Random;
 
 /**
  * @author zzh
@@ -21,13 +18,21 @@ import java.util.Random;
  */
 @Service
 @Slf4j
+@Transactional
 public class UserService implements IUserService {
 
     @Autowired
     private UserMapper userMapper;
 
+    /**
+     * 用户注册
+     * @param user
+     * @return
+     * @throws NoSuchAlgorithmException
+     */
     @Override
     public Integer registerUser(User user) throws NoSuchAlgorithmException {
+        //根据手机号查询是否又已经注册
         User u = userMapper.getUserByMP(user);
         if(u != null) {
             return 0;
@@ -35,21 +40,30 @@ public class UserService implements IUserService {
         user.setCreateTime(new Date());
         String un = user.getMobilePhone();
         user.setUserName(un.substring(0,3) + "****" + un.substring(7, 11));
-        u = userMapper.registerUser(user);
+        userMapper.insertUser(user);
+        //设置默认用户信息
+        UserInfo userInfo = new UserInfo();
+        userInfo.setUserId(user.getId());
+        userInfo.setUserName(user.getUserName());
+        int row = userMapper.insertUserInfo(user);
         log.info("用户" + user.getMobilePhone() + "于" + new Date() + "注册");
         return 1;
     }
 
     /**
-     * 注册用户
+     * 用户登录
      * @param user
      * @return
      */
     @Override
-    public User userLogin(User user) {
+    public UserInfo userLogin(User user) {
+        //根据用户手机查询对应的user
         User u = userMapper.getUserByMP(user);
-        if(u != null && u.getMobilePhone().equals(user.getMobilePhone()) && u.getPassword().equals(user.getPassword())) {
-            return u;
+        //判断密码是否正确
+        if(u != null && u.getPassword().equals(user.getPassword())) {
+            //密码正确则查询具体个人信息
+            UserInfo userInfo = userMapper.getUserInfo(u);
+            return userInfo;
         }
         return null;
     }
