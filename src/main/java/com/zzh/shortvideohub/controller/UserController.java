@@ -1,6 +1,5 @@
 package com.zzh.shortvideohub.controller;
 
-import com.zzh.shortvideohub.mapper.UserMapper;
 import com.zzh.shortvideohub.pojo.Result;
 import com.zzh.shortvideohub.pojo.User;
 import com.zzh.shortvideohub.pojo.UserInfo;
@@ -42,10 +41,25 @@ public class UserController {
      */
     @RequestMapping(value = "/v1/login/api", method = RequestMethod.POST)
     private Result<UserInfo> userLogin(@RequestBody User user) {
-        UserInfo u = userService.userLogin(user);
-        if(u == null) {
+        UserInfo userInfo = userService.userLogin(user);
+        if(userInfo == null) {
             return new Result<UserInfo>(-1, null, "用户名或密码错误");
         }
-        return new Result<UserInfo>(1, u, "登录成功");
+        return new Result<UserInfo>(1, userInfo, "登录成功");
+    }
+
+    /**
+     * 用户信息更新
+     * @param userInfo
+     * @return
+     */
+    @RequestMapping(value = "/v1/userInfo/api", method = RequestMethod.PUT)
+    private Result<Integer> updateUsserInfo(@RequestBody UserInfo userInfo) {
+//        int row = userService.updateUserInfo(userInfo);
+        int row = 0;
+        if(row == 1) {
+            return new Result<Integer>(1, row, "更新成功");
+        }
+        return new Result<Integer>(-1, row, "更新失败");
     }
 }

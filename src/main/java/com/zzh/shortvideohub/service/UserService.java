@@ -45,6 +45,7 @@ public class UserService implements IUserService {
         UserInfo userInfo = new UserInfo();
         userInfo.setUserId(user.getId());
         userInfo.setUserName(user.getUserName());
+        userInfo.setMobilePhone(user.getMobilePhone());
         int row = userMapper.insertUserInfo(user);
         log.info("用户" + user.getMobilePhone() + "于" + new Date() + "注册");
         return 1;
@@ -67,4 +68,16 @@ public class UserService implements IUserService {
         }
         return null;
     }
+
+    /**
+     * 用户信息更新
+     * @param userInfo
+     * @return
+     */
+    @Override
+    public int updateUserInfo(UserInfo userInfo) {
+        int row = userMapper.updateUserInfo(userInfo);
+        return row;
+    }
+
 }

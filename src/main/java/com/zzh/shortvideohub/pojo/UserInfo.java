@@ -12,7 +12,9 @@ import lombok.NoArgsConstructor;
 public class UserInfo {
     private Integer id;
     private Integer userId;
+    private Integer age;
     private String userName;
+    private String mobilePhone;
     private String userAvatar;
     private String sex;
     private String area;

@@ -6,28 +6,40 @@
 
     <!-- 根据手机号查询用户 -->
     <select id="getUserByMP" resultType="com.zzh.shortvideohub.pojo.User">
-        select * from sv_user where mobile_phone = #{user.mobilePhone}
+        select * from sv_user where mobile_phone = #{user.mobilePhone};
     </select>
 
     <!-- 注册用户 -->
     <insert id="insertUser" keyProperty="id" useGeneratedKeys="true" keyColumn="id">
         insert into sv_user (mobile_phone, user_name, password, create_time)
-        values (#{mobilePhone}, #{userName}, #{password}, #{createTime})
+        values (#{mobilePhone}, #{userName}, #{password}, #{createTime});
     </insert>
 
     <!-- 验证用户 -->
     <select id="checkUser" resultType="int">
-        select * from sv_user where mobile_phone = #{user.mobilePhone} and password = #{user.password}
+        select * from sv_user where mobile_phone = #{user.mobilePhone} and password = #{user.password};
     </select>
 
     <!-- 创建默认用户信息 -->
     <insert id="insertUserInfo">
-        insert into user_info (user_id, user_name) values(#{user.id}, #{user.userName});
+        insert into user_info (user_id, user_name, mobile_phone) values(#{user.id}, #{user.userName}, #{user.mobilePhone});
     </insert>
 
     <!-- 取得用户具体信息 -->
     <select id="getUserInfo" resultType="com.zzh.shortvideohub.pojo.UserInfo">
         select * from user_info where user_id = #{user.id};
     </select>
+
+    <!-- 用户信息更新 -->
+    <update id="updateUserInfo">
+        update user_info
+        <set>
+            user_avatar = #{userInfo.userAvatar}, user_name = #{userInfo.userName}, sex = #{userInfo.sex},
+            age = #{userInfo.age}, area = #{userInfo.age}, introduction = #{userInfo.introduction},
+        </set>
+        <where>
+            user_id = #{userInfo.userId};
+        </where>
+    </update>
 
 </mapper>

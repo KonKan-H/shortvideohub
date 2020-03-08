@@ -25,4 +25,11 @@ public interface IUserService {
      * @return
      */
     UserInfo userLogin(User user);
+
+    /**
+     * 用户信息更新
+     * @param userInfo
+     * @return
+     */
+    int updateUserInfo(UserInfo userInfo);
 }

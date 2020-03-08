@@ -46,8 +46,17 @@ public interface UserMapper {
 
     /**
      * 取得用户具体信息
+     *
      * @param user
      * @return
      */
     UserInfo getUserInfo(@Param("user") User user);
+
+    /**
+     * 用户信息更新
+     *
+     * @param userInfo
+     * @return
+     */
+    int updateUserInfo(@Param("userInfo") UserInfo userInfo);
 }
