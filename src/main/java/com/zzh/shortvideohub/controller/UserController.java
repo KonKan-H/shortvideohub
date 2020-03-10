@@ -55,8 +55,7 @@ public class UserController {
      */
     @RequestMapping(value = "/v1/userInfo/api", method = RequestMethod.PUT)
     private Result<Integer> updateUsserInfo(@RequestBody UserInfo userInfo) {
-//        int row = userService.updateUserInfo(userInfo);
-        int row = 0;
+        int row = userService.updateUserInfo(userInfo);
         if(row == 1) {
             return new Result<Integer>(1, row, "更新成功");
         }
