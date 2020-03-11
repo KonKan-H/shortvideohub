@@ -54,11 +54,11 @@ public class UserController {
      * @return
      */
     @RequestMapping(value = "/v1/userInfo/api", method = RequestMethod.PUT)
-    private Result<Integer> updateUsserInfo(@RequestBody UserInfo userInfo) {
+    private Result<UserInfo> updateUsserInfo(@RequestBody UserInfo userInfo) {
         int row = userService.updateUserInfo(userInfo);
         if(row == 1) {
-            return new Result<Integer>(1, row, "更新成功");
+            return new Result<UserInfo>(1, userInfo, "更新成功");
         }
-        return new Result<Integer>(-1, row, "更新失败");
+        return new Result<UserInfo>(-1, null, "更新失败");
     }
 }

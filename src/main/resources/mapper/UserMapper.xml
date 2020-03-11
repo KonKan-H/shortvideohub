@@ -34,9 +34,9 @@
     <update id="updateUserInfo">
         update user_info
         <set>
-            <if test="userInfo.userAvatar != null "> user_avatar = #{userInfo.userAvatar}, </if>
-            user_name = #{userInfo.userName}, sex = #{userInfo.sex},
-            age = #{userInfo.age}, area = #{userInfo.age}, introduction = #{userInfo.introduction},
+            <if test="userInfo.userAvatar != null and userInfo.userAvatar != ''"> user_avatar = #{userInfo.userAvatar}, </if>
+            user_name = #{userInfo.userName},sex = #{userInfo.sex},age = #{userInfo.age},
+            area = #{userInfo.area},introduction = #{userInfo.introduction},
         </set>
         <where>
             user_id = #{userInfo.userId};
