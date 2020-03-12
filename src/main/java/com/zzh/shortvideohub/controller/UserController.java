@@ -26,7 +26,7 @@ public class UserController {
     private UserService userService;
 
     @RequestMapping(value = "/v1/registration/api", method = RequestMethod.POST)
-    private Result<Integer> registration(@RequestBody User user) throws NoSuchAlgorithmException {
+    public Result<Integer> registration(@RequestBody User user) throws NoSuchAlgorithmException {
         Integer row = userService.registerUser(user);
         if(row == 1) {
             return new Result<Integer>(1, 1, "注册成功，返回登录页面登录");
@@ -40,7 +40,7 @@ public class UserController {
      * @return
      */
     @RequestMapping(value = "/v1/login/api", method = RequestMethod.POST)
-    private Result<UserInfo> userLogin(@RequestBody User user) {
+    public Result<UserInfo> userLogin(@RequestBody User user) {
         UserInfo userInfo = userService.userLogin(user);
         if(userInfo == null) {
             return new Result<UserInfo>(-1, null, "用户名或密码错误");
@@ -54,7 +54,7 @@ public class UserController {
      * @return
      */
     @RequestMapping(value = "/v1/userInfo/api", method = RequestMethod.PUT)
-    private Result<UserInfo> updateUsserInfo(@RequestBody UserInfo userInfo) {
+    public Result<UserInfo> updateUsserInfo(@RequestBody UserInfo userInfo) {
         int row = userService.updateUserInfo(userInfo);
         if(row == 1) {
             return new Result<UserInfo>(1, userInfo, "更新成功");
