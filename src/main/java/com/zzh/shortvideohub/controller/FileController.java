@@ -31,7 +31,7 @@ public class FileController {
      * @return
      */
     @RequestMapping(value = "/v1/file/api", method = RequestMethod.POST)
-    public Result<String> uploadFile(@RequestParam(value="file") MultipartFile multipartFile, HttpServletRequest request) throws IOException {
+    public Result<String> uploadFile(@RequestParam(value="file") MultipartFile multipartFile) throws IOException {
         String uri = fileService.uploadFile(multipartFile);
         Result<String> result = new Result<String>(1, uri, "头像上传成功");
         return result;
