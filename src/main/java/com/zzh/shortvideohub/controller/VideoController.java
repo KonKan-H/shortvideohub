@@ -1,9 +1,12 @@
 package com.zzh.shortvideohub.controller;
 
+import com.alibaba.fastjson.JSONObject;
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import com.zzh.shortvideohub.pojo.Result;
 import com.zzh.shortvideohub.pojo.Video;
 import com.zzh.shortvideohub.service.VideoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -27,5 +30,14 @@ public class VideoController {
             return new Result<>(0, null, "视频为空");
         }
         return new Result<List<Video>>(1, videoList, "为您推荐" + videoList.size() + "条视频");
+    }
+
+    @RequestMapping(value = "/v1/like/api", method = RequestMethod.PUT)
+    public Result<Boolean> updateVideoLikes(@RequestBody JSONObject data) {
+        int key = videoService.updateVideoLikes(data);
+        if(key != 1) {
+            return new Result<Boolean>(-1, false, "操作失败");
+        }
+        return new Result<Boolean>(1, true, "操作成功");
     }
 }

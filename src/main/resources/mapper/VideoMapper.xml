@@ -8,4 +8,24 @@
     <select id="getInitVideoList" resultType="com.zzh.shortvideohub.pojo.Video">
         select * from video order by create_time desc limit 20;
     </select>
+
+    <!-- 点赞 -->
+    <update id="updateVideoLikes">
+        update video
+        <set>
+            likes = #{video.likes},
+        </set>
+        where id = #{video.id}
+    </update>
+    
+    <!-- 视频收藏 -->
+    <insert id="insertVideoLike">
+        insert into video_liker (video_id, liker, create_time)
+        values (#{videoLiker.videoId}, #{videoLiker.liker}, #{videoLiker.createTime});
+    </insert>
+
+    <!-- 取消视频收藏 -->
+    <delete id="deleteVideoLike">
+        delete from video_liker where video_id = #{videoLiker.videoId} and liker = #{videoLiker.liker};
+    </delete>
 </mapper>
