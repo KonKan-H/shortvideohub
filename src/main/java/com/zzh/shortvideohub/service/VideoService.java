@@ -1,6 +1,5 @@
 package com.zzh.shortvideohub.service;
 
-import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.zzh.shortvideohub.mapper.VideoMapper;
 import com.zzh.shortvideohub.pojo.Video;
@@ -49,16 +48,33 @@ public class VideoService implements IVideoService {
         VideoLiker videoLiker = new VideoLiker(null, video.getId(), looker, new Date());
         try {
             if(isLiked) {
-                video.setLikes(video.getLikes() + 1);
                 videoMapper.insertVideoLike(videoLiker);
             } else {
-                video.setLikes(video.getLikes() - 1);
                 videoMapper.deleteVideoLike(videoLiker);
             }
-            videoMapper.updateVideoLikes(video, looker);
+            videoMapper.updateVideo(video);
         } catch (Exception e) {
+            log.info(e.toString());
+            log.info("点赞失败， 数据：" + JSONObject.toJSONString(video));
             return -1;
         }
         return 1;
+    }
+
+    /**
+     * 更新视频下载信息
+     * @param video
+     * @return
+     */
+    @Override
+    public int updateVideo(Video video) {
+        int row = 0;
+        try {
+            row = videoMapper.updateVideo(video);
+        } catch (Exception e) {
+            log.info(e.toString());
+            log.info("下载信息更新失败，数据：" + JSONObject.toJSONString(video));
+        }
+        return row;
     }
 }

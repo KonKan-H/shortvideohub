@@ -40,4 +40,8 @@ public class Video {
      * 下载数
      */
     private Integer downloads;
+    /**
+     * 评论数
+     */
+    private Integer comments;
 }

@@ -40,4 +40,13 @@ public class VideoController {
         }
         return new Result<Boolean>(1, true, "操作成功");
     }
+
+    @RequestMapping(value = "v1/video/api", method = RequestMethod.PUT)
+    public  Result<Integer> updateVideo(@RequestBody Video video) {
+        int key = videoService.updateVideo(video);
+        if(key != 1) {
+            return new Result<Integer>(-1, 0, "操作失败");
+        }
+        return new Result<Integer>(1, 1, "操作成功");
+    }
 }

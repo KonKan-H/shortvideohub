@@ -23,4 +23,11 @@ public interface IVideoService {
      * @return
      */
     int updateVideoLikes(JSONObject data);
+
+    /**
+     * 更新视频信息
+     * @param video
+     * @return
+     */
+    int updateVideo(Video video);
 }

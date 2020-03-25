@@ -22,12 +22,11 @@ public interface VideoMapper {
     List<Video> getInitVideoList();
 
     /**
-     * 点赞
+     * 更新视频信息
      *
      * @param video
-     * @param looker
      */
-    int updateVideoLikes(@Param("video") Video video, @Param("looker") int looker);
+    int updateVideo(@Param("video") Video video);
 
     /**
      * 视频收藏

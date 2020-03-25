@@ -10,10 +10,12 @@
     </select>
 
     <!-- 点赞 -->
-    <update id="updateVideoLikes">
+    <update id="updateVideo">
         update video
         <set>
-            likes = #{video.likes},
+            <if test="video.likes != null">likes = #{video.likes},</if>
+            <if test="video.comments != null">comments = #{video.comments},</if>
+            <if test="video.downloads != null ">downloads = #{video.downloads},</if>
         </set>
         where id = #{video.id}
     </update>
