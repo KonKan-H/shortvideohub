@@ -80,4 +80,15 @@ public class UserService implements IUserService {
         return row;
     }
 
+    /**
+     * 更新密码
+     * @param user
+     * @return
+     */
+    @Override
+    public int updatePassword(User user) {
+        int row = userMapper.updatePassword(user);
+        return row;
+    }
+
 }

@@ -32,4 +32,11 @@ public interface IUserService {
      * @return
      */
     int updateUserInfo(UserInfo userInfo);
+
+    /**
+     * 更新密码
+     * @param user
+     * @return
+     */
+    int updatePassword(User user);
 }

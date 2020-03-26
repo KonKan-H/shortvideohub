@@ -43,4 +43,10 @@
         </where>
     </update>
 
+    <!-- 更新密码 -->
+    <update id="updatePassword">
+        update sv_user set password = #{user.password}
+        where mobile_phone = #{user.mobilePhone};
+    </update>
+
 </mapper>

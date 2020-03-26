@@ -61,4 +61,19 @@ public class UserController {
         }
         return new Result<UserInfo>(-1, null, "更新失败");
     }
+
+    /**
+     * 更新密码
+     * @param user
+     * @return
+     */
+    @RequestMapping(value = "/v1/password/api", method = RequestMethod.PUT)
+    public Result<Integer> updatePassword(@RequestBody User user) {
+        int row = userService.updatePassword(user);
+        if(row != 1) {
+            return new Result<Integer >(-1, 0, "操作失败");
+        }
+        return new Result<Integer>(1, 1, "操作成功");
+    }
+
 }

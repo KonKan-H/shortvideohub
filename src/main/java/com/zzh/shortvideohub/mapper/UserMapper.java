@@ -59,4 +59,12 @@ public interface UserMapper {
      * @return
      */
     int updateUserInfo(@Param("userInfo") UserInfo userInfo);
+
+    /**
+     * 更新密码
+     *
+     * @param user
+     * @return
+     */
+    int updatePassword(@Param("user") User user);
 }

@@ -23,13 +23,6 @@ public class TestTest {
         md5.update("123456".getBytes());
         String result = new BigInteger(1, md5.digest()).toString(16);
         System.out.println(result);
-        System.out.println(md5.digest());
-    }
-
-    @Test
-    public void intTest() {
-        Integer i;
-        System.out.println();
     }
 
 }
