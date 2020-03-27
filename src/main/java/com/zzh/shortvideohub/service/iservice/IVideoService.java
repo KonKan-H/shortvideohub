@@ -30,4 +30,11 @@ public interface IVideoService {
      * @return
      */
     int updateVideo(Video video);
+
+    /**
+     * 判断视频是否喜欢
+     * @param video
+     * @return
+     */
+    Boolean getVideoLikeOrNot(Video video);
 }

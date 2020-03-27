@@ -38,8 +38,17 @@ public interface VideoMapper {
 
     /**
      * 删除视频收藏
+     *
      * @param videoLiker
      * @return
      */
     int deleteVideoLike(@Param("videoLiker") VideoLiker videoLiker);
+
+    /**
+     * 判断视频是否喜欢
+     *
+     * @param video
+     * @return
+     */
+    int getVideoLikeOrNot(@Param("video") Video video);
 }

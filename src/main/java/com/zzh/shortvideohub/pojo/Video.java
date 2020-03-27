@@ -44,4 +44,8 @@ public class Video {
      * 评论数
      */
     private Integer comments;
+    /**
+     * 观看人
+     */
+    private Integer looker;
 }

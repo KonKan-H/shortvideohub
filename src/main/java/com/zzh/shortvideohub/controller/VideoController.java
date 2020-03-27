@@ -23,6 +23,10 @@ public class VideoController {
     @Autowired
     private VideoService videoService;
 
+    /**
+     * 取得初始化视频列表
+     * @return
+     */
     @RequestMapping(value = "/v1/video/api", method = RequestMethod.GET)
     public Result<List<Video>> getInitVideoList() {
         List<Video> videoList = videoService.getInitVideoList();
@@ -32,6 +36,11 @@ public class VideoController {
         return new Result<List<Video>>(1, videoList, "为您推荐" + videoList.size() + "条视频");
     }
 
+    /**
+     * 更新视频喜欢数
+     * @param data
+     * @return
+     */
     @RequestMapping(value = "/v1/like/api", method = RequestMethod.PUT)
     public Result<Boolean> updateVideoLikes(@RequestBody JSONObject data) {
         int key = videoService.updateVideoLikes(data);
@@ -41,6 +50,11 @@ public class VideoController {
         return new Result<Boolean>(1, true, "操作成功");
     }
 
+    /**
+     * 更新视频
+     * @param video
+     * @return
+     */
     @RequestMapping(value = "v1/video/api", method = RequestMethod.PUT)
     public  Result<Integer> updateVideo(@RequestBody Video video) {
         int key = videoService.updateVideo(video);
@@ -48,5 +62,16 @@ public class VideoController {
             return new Result<Integer>(-1, 0, "操作失败");
         }
         return new Result<Integer>(1, 1, "操作成功");
+    }
+
+    /**
+     * 判断视频是否喜欢
+     * @param video
+     * @return
+     */
+    @RequestMapping(value = "v1/like/api", method = RequestMethod.POST)
+    public Result<Boolean> getVideoLikeOrNot(@RequestBody Video video) {
+        Boolean flag = videoService.getVideoLikeOrNot(video);;
+        return new Result<Boolean>(1, flag, "操作成功");
     }
 }

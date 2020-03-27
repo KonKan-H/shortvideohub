@@ -75,5 +75,4 @@ public class UserController {
         }
         return new Result<Integer>(1, 1, "操作成功");
     }
-
 }

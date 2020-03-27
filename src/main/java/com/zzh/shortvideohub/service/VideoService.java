@@ -77,4 +77,16 @@ public class VideoService implements IVideoService {
         }
         return row;
     }
+
+    /**
+     * 判断视频是否喜欢
+     * @param video
+     * @return
+     */
+    @Override
+    public Boolean getVideoLikeOrNot(Video video) {
+        int row = videoMapper.getVideoLikeOrNot(video);
+        Boolean flag = row == 1 ? true : false;
+        return flag;
+    }
 }
