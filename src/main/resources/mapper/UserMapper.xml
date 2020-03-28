@@ -49,4 +49,16 @@
         where mobile_phone = #{user.mobilePhone};
     </update>
 
+    <!-- 更新用户 -->
+    <update id="updateUser">
+        update sv_user
+        <set>
+            <if test="user.lastLoginTime != null">last_login_time = #{user.lastLoginTime},</if>
+            <if test="user.userName != null">user_name = #{user.userName},</if>
+        </set>
+        <where>
+            id = #{user.id};
+        </where>
+    </update>
+
 </mapper>

@@ -33,6 +33,6 @@
 
     <!-- 判断视频是否喜欢 -->
     <select id="getVideoLikeOrNot" resultType="int">
-        select count(*) from video_liker where video_id = #{video.id} and video_liker = #{video.looker};
+        select count(*) from video_liker where video_id = #{video.id} and liker = #{video.looker};
     </select>
 </mapper>

@@ -64,6 +64,10 @@ public class UserService implements IUserService {
         if(u != null && u.getPassword().equals(user.getPassword())) {
             //密码正确则查询具体个人信息
             UserInfo userInfo = userMapper.getUserInfo(u);
+            User user1 = new User();
+            user1.setLastLoginTime(new Date());
+            user1.setId(u.getId());
+            userMapper.updateUser(user1);
             return userInfo;
         }
         return null;
@@ -77,6 +81,7 @@ public class UserService implements IUserService {
     @Override
     public int updateUserInfo(UserInfo userInfo) {
         int row = userMapper.updateUserInfo(userInfo);
+        User user = new User();
         return row;
     }
 

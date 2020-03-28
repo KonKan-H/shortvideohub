@@ -67,4 +67,11 @@ public interface UserMapper {
      * @return
      */
     int updatePassword(@Param("user") User user);
+
+    /**
+     * 更新用户
+     * @param user
+     * @return
+     */
+    int updateUser(@Param("user") User user);
 }
