@@ -2,7 +2,6 @@ package com.zzh.shortvideohub.mapper;
 
 import com.zzh.shortvideohub.pojo.User;
 import com.zzh.shortvideohub.pojo.UserInfo;
-import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 

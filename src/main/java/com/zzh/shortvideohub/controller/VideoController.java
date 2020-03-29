@@ -1,7 +1,5 @@
 package com.zzh.shortvideohub.controller;
-
 import com.alibaba.fastjson.JSONObject;
-import com.sun.org.apache.xpath.internal.operations.Bool;
 import com.zzh.shortvideohub.pojo.Result;
 import com.zzh.shortvideohub.pojo.Video;
 import com.zzh.shortvideohub.service.VideoService;
@@ -10,7 +8,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-
 import java.util.List;
 
 /**
