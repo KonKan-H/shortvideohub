@@ -1,6 +1,7 @@
 package com.zzh.shortvideohub.service;
 
 import com.zzh.shortvideohub.mapper.UserMapper;
+import com.zzh.shortvideohub.pojo.Attention;
 import com.zzh.shortvideohub.pojo.User;
 import com.zzh.shortvideohub.pojo.UserInfo;
 import com.zzh.shortvideohub.pojo.Video;
@@ -99,18 +100,39 @@ public class UserService implements IUserService {
 
     /**
      * 判断观看者是否关注了视频用户
-     * @param video
+     * @param attention
      * @return
      */
     @Override
-    public Boolean getAttentionOrNot(Video video) {
-        int fansId = video.getLooker();
-        int userId = video.getAuthorId();
-        if(fansId == userId) {
+    public Boolean getAttentionOrNot(Attention attention) {
+        if(attention.getFansId() == attention.getUserId()) {
             return true;
         }
-        int num = userMapper.selectAttentionOrNot(userId, fansId);
+        int num = userMapper.selectAttentionOrNot(attention);
         return num == 1 ? true : false;
+    }
+
+    /**
+     * 根据id查询userInfo
+     * @param userId
+     * @return
+     */
+    @Override
+    public UserInfo getUserInfoById(Integer userId) {
+        UserInfo userInfo = userMapper.selectUserInfoById(userId);
+        return userInfo;
+    }
+
+    /**
+     * 关注
+     * @param attention
+     * @return
+     */
+    @Override
+    public Boolean attentionUser(Attention attention) {
+        attention.setNow(new Date());
+        int row = userMapper.attentionUser(attention);
+        return null;
     }
 
 }

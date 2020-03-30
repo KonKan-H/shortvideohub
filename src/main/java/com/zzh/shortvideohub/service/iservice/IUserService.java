@@ -1,9 +1,6 @@
 package com.zzh.shortvideohub.service.iservice;
 
-import com.zzh.shortvideohub.pojo.Result;
-import com.zzh.shortvideohub.pojo.User;
-import com.zzh.shortvideohub.pojo.UserInfo;
-import com.zzh.shortvideohub.pojo.Video;
+import com.zzh.shortvideohub.pojo.*;
 
 import java.security.NoSuchAlgorithmException;
 
@@ -43,8 +40,22 @@ public interface IUserService {
 
     /**
      * 判断观看者是否关注了视频用户
-     * @param video
+     * @param attention
      * @return
      */
-    Boolean getAttentionOrNot(Video video);
+    Boolean getAttentionOrNot(Attention attention);
+
+    /**
+     * 根据id查询userInfo
+     * @param userId
+     * @return
+     */
+    UserInfo getUserInfoById(Integer userId);
+
+    /**
+     * 关注
+     * @param attention
+     * @return
+     */
+    Boolean attentionUser(Attention attention);
 }

@@ -63,7 +63,18 @@
 
     <!-- 判断观看者是否关注了视频用户 -->
     <select id="selectAttentionOrNot" resultType="int">
-        select count(*) from attention_info where user_id = #{userId} and fans_id = #{fansId};
+        select count(*) from attention_info where user_id = #{attention.userId} and fans_id = #{attention.fansId};
     </select>
+
+    <!-- 根据id查询userInfo -->
+    <select id="selectUserInfoById" resultType="com.zzh.shortvideohub.pojo.UserInfo">
+        select * from user_info where  user_id = #{userId};
+    </select>
+
+    <!-- 关注 -->
+    <insert id="attentionUser">
+        insert into attention_info (user_id, fans_id, create_time)
+        values (#{attention.userId}, #{attention.fansId}, #{attention.now});
+    </insert>
 
 </mapper>

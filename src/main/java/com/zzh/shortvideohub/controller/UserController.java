@@ -1,9 +1,8 @@
 package com.zzh.shortvideohub.controller;
 
-import com.zzh.shortvideohub.pojo.Result;
-import com.zzh.shortvideohub.pojo.User;
-import com.zzh.shortvideohub.pojo.UserInfo;
-import com.zzh.shortvideohub.pojo.Video;
+import com.alibaba.fastjson.JSONObject;
+import com.sun.org.apache.xpath.internal.operations.Bool;
+import com.zzh.shortvideohub.pojo.*;
 import com.zzh.shortvideohub.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +24,12 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    /**
+     * 注册
+     * @param user
+     * @return
+     * @throws NoSuchAlgorithmException
+     */
     @RequestMapping(value = "/v1/registration/api", method = RequestMethod.POST)
     public Result<Integer> registration(@RequestBody User user) throws NoSuchAlgorithmException {
         Integer row = userService.registerUser(user);
@@ -78,12 +83,38 @@ public class UserController {
 
     /**
      * 判断观看者是否关注了视频用户
-     * @param video
+     * @param attention
      * @return
      */
     @RequestMapping(value = "/v1/attention/api", method = RequestMethod.POST)
-    public Result<Boolean> getAttentionOrNot(@RequestBody Video video) {
-        Boolean flag = userService.getAttentionOrNot(video);
+    public Result<Boolean> getAttentionOrNot(@RequestBody Attention attention) {
+        Boolean flag = userService.getAttentionOrNot(attention);
         return new Result<Boolean>(1, flag, "操作成功");
+    }
+
+    /**
+     * 关注
+     * @param attention
+     * @return
+     */
+    @RequestMapping(value = "v1/attention/user/api", method = RequestMethod.POST)
+    public Result<Boolean> attentionUser(@RequestBody Attention attention) {
+        Boolean flag = userService.attentionUser(attention);
+        return new Result<>(1, flag, "关注成功");
+    }
+
+    /**
+     * 根据id查询userInfo
+     * @param jsonObject
+     * @return
+     */
+    @RequestMapping(value = "/v1/userInfo/id/api", method = RequestMethod.POST)
+    public Result<UserInfo> getUserInfoById(@RequestBody JSONObject jsonObject) {
+        int userId = Integer.valueOf(jsonObject.get("userId").toString());
+        UserInfo userInfo = userService.getUserInfoById(userId);
+        if(userInfo == null) {
+            return new Result<>(1, null, "通讯失败");
+        }
+        return new Result<>(1, userInfo, "查询成功");
     }
 }

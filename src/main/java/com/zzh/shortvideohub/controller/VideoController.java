@@ -68,7 +68,7 @@ public class VideoController {
      */
     @RequestMapping(value = "v1/like/api", method = RequestMethod.POST)
     public Result<Boolean> getVideoLikeOrNot(@RequestBody Video video) {
-        Boolean flag = videoService.getVideoLikeOrNot(video);;
+        Boolean flag = videoService.getVideoLikeOrNot(video);
         return new Result<Boolean>(1, flag, "操作成功");
     }
 }

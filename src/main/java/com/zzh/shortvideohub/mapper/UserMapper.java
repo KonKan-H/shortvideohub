@@ -1,5 +1,6 @@
 package com.zzh.shortvideohub.mapper;
 
+import com.zzh.shortvideohub.pojo.Attention;
 import com.zzh.shortvideohub.pojo.User;
 import com.zzh.shortvideohub.pojo.UserInfo;
 import org.apache.ibatis.annotations.Param;
@@ -80,9 +81,23 @@ public interface UserMapper {
     /**
      * 判断观看者是否关注了视频用户
      *
-     * @param userId
-     * @param fansId
+     * @param attention
      * @return
      */
-    int selectAttentionOrNot(@Param("userId") int userId, @Param("fansId") int fansId);
+    int selectAttentionOrNot(@Param("attention") Attention attention);
+
+    /**
+     * 根据id查询userInfo
+     *
+     * @param userId
+     * @return
+     */
+    UserInfo selectUserInfoById(@Param("userId") Integer userId);
+
+    /**
+     * 关注
+     * @param attention
+     * @return
+     */
+    int attentionUser(@Param("attention") Attention attention);
 }
