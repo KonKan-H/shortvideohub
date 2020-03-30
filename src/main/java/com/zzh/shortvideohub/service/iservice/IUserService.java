@@ -3,6 +3,7 @@ package com.zzh.shortvideohub.service.iservice;
 import com.zzh.shortvideohub.pojo.Result;
 import com.zzh.shortvideohub.pojo.User;
 import com.zzh.shortvideohub.pojo.UserInfo;
+import com.zzh.shortvideohub.pojo.Video;
 
 import java.security.NoSuchAlgorithmException;
 
@@ -39,4 +40,11 @@ public interface IUserService {
      * @return
      */
     int updatePassword(User user);
+
+    /**
+     * 判断观看者是否关注了视频用户
+     * @param video
+     * @return
+     */
+    Boolean getAttentionOrNot(Video video);
 }

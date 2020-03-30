@@ -61,4 +61,9 @@
         </where>
     </update>
 
+    <!-- 判断观看者是否关注了视频用户 -->
+    <select id="selectAttentionOrNot" resultType="int">
+        select count(*) from attention_info where user_id = #{userId} and fans_id = #{fansId};
+    </select>
+
 </mapper>

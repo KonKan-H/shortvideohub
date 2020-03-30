@@ -3,6 +3,7 @@ package com.zzh.shortvideohub.controller;
 import com.zzh.shortvideohub.pojo.Result;
 import com.zzh.shortvideohub.pojo.User;
 import com.zzh.shortvideohub.pojo.UserInfo;
+import com.zzh.shortvideohub.pojo.Video;
 import com.zzh.shortvideohub.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -73,5 +74,16 @@ public class UserController {
             return new Result<Integer >(-1, 0, "操作失败");
         }
         return new Result<Integer>(1, 1, "操作成功");
+    }
+
+    /**
+     * 判断观看者是否关注了视频用户
+     * @param video
+     * @return
+     */
+    @RequestMapping(value = "/v1/attention/api", method = RequestMethod.POST)
+    public Result<Boolean> getAttentionOrNot(@RequestBody Video video) {
+        Boolean flag = userService.getAttentionOrNot(video);
+        return new Result<Boolean>(1, flag, "操作成功");
     }
 }

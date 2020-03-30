@@ -5,6 +5,8 @@ import com.zzh.shortvideohub.pojo.UserInfo;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.Date;
+
 /**
  * @author zzh
  * @date 2020/2/28 16:32
@@ -69,8 +71,18 @@ public interface UserMapper {
 
     /**
      * 更新用户
+     *
      * @param user
      * @return
      */
     int updateUser(@Param("user") User user);
+
+    /**
+     * 判断观看者是否关注了视频用户
+     *
+     * @param userId
+     * @param fansId
+     * @return
+     */
+    int selectAttentionOrNot(@Param("userId") int userId, @Param("fansId") int fansId);
 }

@@ -3,6 +3,7 @@ package com.zzh.shortvideohub.service;
 import com.zzh.shortvideohub.mapper.UserMapper;
 import com.zzh.shortvideohub.pojo.User;
 import com.zzh.shortvideohub.pojo.UserInfo;
+import com.zzh.shortvideohub.pojo.Video;
 import com.zzh.shortvideohub.service.iservice.IUserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -94,6 +95,22 @@ public class UserService implements IUserService {
     public int updatePassword(User user) {
         int row = userMapper.updatePassword(user);
         return row;
+    }
+
+    /**
+     * 判断观看者是否关注了视频用户
+     * @param video
+     * @return
+     */
+    @Override
+    public Boolean getAttentionOrNot(Video video) {
+        int fansId = video.getLooker();
+        int userId = video.getAuthorId();
+        if(fansId == userId) {
+            return true;
+        }
+        int num = userMapper.selectAttentionOrNot(userId, fansId);
+        return num == 1 ? true : false;
     }
 
 }
