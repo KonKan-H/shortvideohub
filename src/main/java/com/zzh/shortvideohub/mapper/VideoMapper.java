@@ -1,5 +1,6 @@
 package com.zzh.shortvideohub.mapper;
 
+import com.zzh.shortvideohub.pojo.UserInfo;
 import com.zzh.shortvideohub.pojo.Video;
 import com.zzh.shortvideohub.pojo.VideoLiker;
 import org.apache.ibatis.annotations.Param;
@@ -19,7 +20,7 @@ public interface VideoMapper {
      *
      * @return
      */
-    List<Video> getInitVideoList();
+    List<Video> getInitVideoList(@Param("userInfo") UserInfo userInfo);
 
     /**
      * 更新视频信息

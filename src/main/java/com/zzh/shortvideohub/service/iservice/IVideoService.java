@@ -1,6 +1,7 @@
 package com.zzh.shortvideohub.service.iservice;
 
 import com.alibaba.fastjson.JSONObject;
+import com.zzh.shortvideohub.pojo.UserInfo;
 import com.zzh.shortvideohub.pojo.Video;
 
 import java.util.List;
@@ -15,7 +16,7 @@ public interface IVideoService {
      * 取得初始视频队列
      * @return
      */
-    List<Video> getInitVideoList();
+    List<Video> getInitVideoList(UserInfo userInfo);
 
     /**
      * 点赞

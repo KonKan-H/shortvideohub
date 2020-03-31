@@ -2,6 +2,7 @@ package com.zzh.shortvideohub.service;
 
 import com.alibaba.fastjson.JSONObject;
 import com.zzh.shortvideohub.mapper.VideoMapper;
+import com.zzh.shortvideohub.pojo.UserInfo;
 import com.zzh.shortvideohub.pojo.Video;
 import com.zzh.shortvideohub.pojo.VideoLiker;
 import com.zzh.shortvideohub.service.iservice.IVideoService;
@@ -30,8 +31,8 @@ public class VideoService implements IVideoService {
      * @return
      */
     @Override
-    public List<Video> getInitVideoList() {
-        List<Video> videoList = videoMapper.getInitVideoList();
+    public List<Video> getInitVideoList(UserInfo userInfo) {
+        List<Video> videoList = videoMapper.getInitVideoList(userInfo);
         return videoList;
     }
 

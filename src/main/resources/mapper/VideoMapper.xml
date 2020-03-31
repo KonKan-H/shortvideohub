@@ -6,7 +6,13 @@
 
     <!-- 取得初始视频队列 -->
     <select id="getInitVideoList" resultType="com.zzh.shortvideohub.pojo.Video">
-        select * from video order by create_time desc limit 20;
+        select * from video
+        <if test="userInfo.id != null">
+            <where>
+                author_id = #{userInfo.id}
+            </where>
+        </if>
+        order by create_time desc limit 20;
     </select>
 
     <!-- 点赞 -->

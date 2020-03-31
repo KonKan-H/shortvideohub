@@ -1,6 +1,7 @@
 package com.zzh.shortvideohub.controller;
 import com.alibaba.fastjson.JSONObject;
 import com.zzh.shortvideohub.pojo.Result;
+import com.zzh.shortvideohub.pojo.UserInfo;
 import com.zzh.shortvideohub.pojo.Video;
 import com.zzh.shortvideohub.service.VideoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,9 +25,9 @@ public class VideoController {
      * 取得初始化视频列表
      * @return
      */
-    @RequestMapping(value = "/v1/video/api", method = RequestMethod.GET)
-    public Result<List<Video>> getInitVideoList() {
-        List<Video> videoList = videoService.getInitVideoList();
+    @RequestMapping(value = "/v1/video/api", method = RequestMethod.POST)
+    public Result<List<Video>> getInitVideoList(@RequestBody UserInfo userInfo) {
+        List<Video> videoList = videoService.getInitVideoList(userInfo);
         if(videoList == null || videoList.size() ==0) {
             return new Result<>(0, null, "视频为空");
         }
