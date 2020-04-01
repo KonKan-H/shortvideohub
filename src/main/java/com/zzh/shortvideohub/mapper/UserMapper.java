@@ -1,12 +1,11 @@
 package com.zzh.shortvideohub.mapper;
 
 import com.zzh.shortvideohub.pojo.Attention;
+import com.zzh.shortvideohub.pojo.AttentionsFans;
 import com.zzh.shortvideohub.pojo.User;
 import com.zzh.shortvideohub.pojo.UserInfo;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
-
-import java.util.Date;
 
 /**
  * @author zzh
@@ -96,8 +95,32 @@ public interface UserMapper {
 
     /**
      * 关注
+     *
      * @param attention
      * @return
      */
     int attentionUser(@Param("attention") Attention attention);
+
+    /**
+     * 增加粉丝数
+     *
+     * @param attention
+     * @return
+     */
+    int updateFansNum(@Param("attention") Attention attention);
+
+    /**
+     * 增加关注数
+     *
+     * @param attention
+     * @return
+     */
+    int updateAttentionsNum(@Param("attention") Attention attention);
+
+    /**
+     * 取得关注数和粉丝数
+     * @param userInfo
+     * @return
+     */
+    AttentionsFans getUserFansAndAttention(@Param("userInfo") UserInfo userInfo);
 }

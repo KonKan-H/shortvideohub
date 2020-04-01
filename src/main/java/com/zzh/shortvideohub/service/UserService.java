@@ -1,10 +1,7 @@
 package com.zzh.shortvideohub.service;
 
 import com.zzh.shortvideohub.mapper.UserMapper;
-import com.zzh.shortvideohub.pojo.Attention;
-import com.zzh.shortvideohub.pojo.User;
-import com.zzh.shortvideohub.pojo.UserInfo;
-import com.zzh.shortvideohub.pojo.Video;
+import com.zzh.shortvideohub.pojo.*;
 import com.zzh.shortvideohub.service.iservice.IUserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -114,12 +111,12 @@ public class UserService implements IUserService {
 
     /**
      * 根据id查询userInfo
-     * @param userId
+     * @param u
      * @return
      */
     @Override
-    public UserInfo getUserInfoById(Integer userId) {
-        UserInfo userInfo = userMapper.selectUserInfoById(userId);
+    public UserInfo getUserInfoById(UserInfo u) {
+        UserInfo userInfo = userMapper.selectUserInfoById(u.getUserId());
         return userInfo;
     }
 
@@ -132,7 +129,22 @@ public class UserService implements IUserService {
     public Boolean attentionUser(Attention attention) {
         attention.setNow(new Date());
         int row = userMapper.attentionUser(attention);
-        return null;
+        //增加粉丝数
+        userMapper.updateFansNum(attention);
+        //增加关注数
+        userMapper.updateAttentionsNum(attention);
+        return row == 1 ? true : false;
+    }
+
+    /**
+     * 取得关注数和粉丝数
+     * @param userInfo
+     * @return
+     */
+    @Override
+    public AttentionsFans getUserFansAndAttention(UserInfo userInfo) {
+        AttentionsFans attentionFans = userMapper.getUserFansAndAttention(userInfo);
+        return attentionFans;
     }
 
 }

@@ -1,7 +1,5 @@
 package com.zzh.shortvideohub.controller;
 
-import com.alibaba.fastjson.JSONObject;
-import com.sun.org.apache.xpath.internal.operations.Bool;
 import com.zzh.shortvideohub.pojo.*;
 import com.zzh.shortvideohub.service.UserService;
 import lombok.extern.slf4j.Slf4j;
@@ -105,16 +103,26 @@ public class UserController {
 
     /**
      * 根据id查询userInfo
-     * @param jsonObject
+     * @param u
      * @return
      */
     @RequestMapping(value = "/v1/userInfo/id/api", method = RequestMethod.POST)
-    public Result<UserInfo> getUserInfoById(@RequestBody JSONObject jsonObject) {
-        int userId = Integer.valueOf(jsonObject.get("userId").toString());
-        UserInfo userInfo = userService.getUserInfoById(userId);
+    public Result<UserInfo> getUserInfoById(@RequestBody UserInfo u) {
+        UserInfo userInfo = userService.getUserInfoById(u);
         if(userInfo == null) {
             return new Result<>(1, null, "通讯失败");
         }
         return new Result<>(1, userInfo, "查询成功");
+    }
+
+    /**
+     * 取得关注数和粉丝数
+     * @param userInfo
+     * @return
+     */
+    @RequestMapping(value = "/v1/fans/attention/api", method = RequestMethod.POST)
+    public Result<AttentionsFans> getUserFansAndAttention(@RequestBody UserInfo userInfo) {
+        AttentionsFans attentionsFans = userService.getUserFansAndAttention(userInfo);
+        return new Result<>(1, attentionsFans, "查询成功");
     }
 }

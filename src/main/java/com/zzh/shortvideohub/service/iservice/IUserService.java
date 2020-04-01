@@ -47,10 +47,10 @@ public interface IUserService {
 
     /**
      * 根据id查询userInfo
-     * @param userId
+     * @param userInfo
      * @return
      */
-    UserInfo getUserInfoById(Integer userId);
+    UserInfo getUserInfoById(UserInfo userInfo);
 
     /**
      * 关注
@@ -58,4 +58,11 @@ public interface IUserService {
      * @return
      */
     Boolean attentionUser(Attention attention);
+
+    /**
+     * 取得关注数和粉丝数
+     * @param userInfo
+     * @return
+     */
+    AttentionsFans getUserFansAndAttention(UserInfo userInfo);
 }

@@ -19,4 +19,6 @@ public class UserInfo {
     private String sex;
     private String area;
     private String introduction;
+    private Integer fans;
+    private Integer attentions;
 }

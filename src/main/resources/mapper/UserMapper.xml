@@ -22,7 +22,8 @@
 
     <!-- 创建默认用户信息 -->
     <insert id="insertUserInfo">
-        insert into user_info (user_id, user_name, mobile_phone) values(#{user.id}, #{user.userName}, #{user.mobilePhone});
+        insert into user_info (user_id, user_name, mobile_phone, fans, attentions)
+        values(#{user.id}, #{user.userName}, #{user.mobilePhone}, 0, 0);
     </insert>
 
     <!-- 取得用户具体信息 -->
@@ -76,5 +77,20 @@
         insert into attention_info (user_id, fans_id, create_time)
         values (#{attention.userId}, #{attention.fansId}, #{attention.now});
     </insert>
+
+    <!-- 增加粉丝数 -->
+    <update id="updateFansNum">
+        update user_info set fans = fans + 1 where user_id = #{attention.userId};
+    </update>
+
+    <!-- 增加关注数 -->
+    <update id="updateAttentionsNum">
+        update user_info set attentions = attentions + 1 where user_id = #{attention.fansId};
+    </update>
+
+    <!-- 取得关注数和粉丝数 -->
+    <select id="getUserFansAndAttention" resultType="com.zzh.shortvideohub.pojo.AttentionsFans">
+        select fans, attentions from user_info where user_id = #{userInfo.userId};
+    </select>
 
 </mapper>
