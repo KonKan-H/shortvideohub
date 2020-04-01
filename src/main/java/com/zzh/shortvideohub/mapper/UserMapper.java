@@ -107,7 +107,7 @@ public interface UserMapper {
      * @param attention
      * @return
      */
-    int updateFansNum(@Param("attention") Attention attention);
+    int insertFansNum(@Param("attention") Attention attention);
 
     /**
      * 增加关注数
@@ -115,12 +115,37 @@ public interface UserMapper {
      * @param attention
      * @return
      */
-    int updateAttentionsNum(@Param("attention") Attention attention);
+    int insertAttentionsNum(@Param("attention") Attention attention);
+
+    /**
+     * 减少粉丝数
+     *
+     * @param attention
+     * @return
+     */
+    int decreaseFansNum(@Param("attention") Attention attention);
+
+    /**
+     * 减少关注数
+     * @param attention
+     * @return
+     */
+    int decreaseAttentionNum(@Param("attention") Attention attention);
 
     /**
      * 取得关注数和粉丝数
+     *
      * @param userInfo
      * @return
      */
     AttentionsFans getUserFansAndAttention(@Param("userInfo") UserInfo userInfo);
+
+    /**
+     * 取消关注
+     *
+     * @param attention
+     * @return
+     */
+    int cancelAttentionUser(@Param("attention") Attention attention);
+
 }

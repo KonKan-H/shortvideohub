@@ -95,10 +95,21 @@ public class UserController {
      * @param attention
      * @return
      */
-    @RequestMapping(value = "v1/attention/user/api", method = RequestMethod.POST)
+    @RequestMapping(value = "/v1/attention/user/insert/api", method = RequestMethod.POST)
     public Result<Boolean> attentionUser(@RequestBody Attention attention) {
         Boolean flag = userService.attentionUser(attention);
         return new Result<>(1, flag, "关注成功");
+    }
+
+    /**
+     * 取消关注
+     * @param attention
+     * @return
+     */
+    @RequestMapping(value = "/v1/attention/user/cancel/api", method = RequestMethod.POST)
+    public Result<Boolean> cancelAttentionUser(@RequestBody Attention attention) {
+        Boolean flag = userService.cancelAttentionUser(attention);
+        return new Result<>(1, flag, "取消关注成功");
     }
 
     /**

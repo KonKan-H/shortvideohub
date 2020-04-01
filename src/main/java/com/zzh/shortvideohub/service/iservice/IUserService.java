@@ -65,4 +65,11 @@ public interface IUserService {
      * @return
      */
     AttentionsFans getUserFansAndAttention(UserInfo userInfo);
+
+    /**
+     * 取消
+     * @param attention
+     * @return
+     */
+    Boolean cancelAttentionUser(Attention attention);
 }

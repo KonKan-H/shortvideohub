@@ -130,9 +130,24 @@ public class UserService implements IUserService {
         attention.setNow(new Date());
         int row = userMapper.attentionUser(attention);
         //增加粉丝数
-        userMapper.updateFansNum(attention);
+        userMapper.insertFansNum(attention);
         //增加关注数
-        userMapper.updateAttentionsNum(attention);
+        userMapper.insertAttentionsNum(attention);
+        return row == 1 ? true : false;
+    }
+
+    /**
+     * 取消关注
+     * @param attention
+     * @return
+     */
+    @Override
+    public Boolean cancelAttentionUser(Attention attention) {
+        int row = userMapper.cancelAttentionUser(attention);
+        //减少粉丝数
+        userMapper.decreaseFansNum(attention);
+        //减少关注数
+        userMapper.decreaseAttentionNum(attention);
         return row == 1 ? true : false;
     }
 
