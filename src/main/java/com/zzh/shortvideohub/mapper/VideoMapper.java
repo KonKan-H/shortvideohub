@@ -52,4 +52,11 @@ public interface VideoMapper {
      * @return
      */
     int getVideoLikeOrNot(@Param("video") Video video);
+
+    /**
+     * 删除视频
+     * @param video
+     * @return
+     */
+    int deleteVideo(@Param("video") Video video);
 }

@@ -1,6 +1,8 @@
 package com.zzh.shortvideohub.service;
 
 import com.alibaba.fastjson.JSONObject;
+import com.sun.org.apache.xpath.internal.operations.Bool;
+import com.zzh.shortvideohub.mapper.UserMapper;
 import com.zzh.shortvideohub.mapper.VideoMapper;
 import com.zzh.shortvideohub.pojo.UserInfo;
 import com.zzh.shortvideohub.pojo.Video;
@@ -89,5 +91,11 @@ public class VideoService implements IVideoService {
         int row = videoMapper.getVideoLikeOrNot(video);
         Boolean flag = row == 1 ? true : false;
         return flag;
+    }
+
+    @Override
+    public Boolean deleteVideo(Video video) {
+        int row = videoMapper.deleteVideo(video);
+        return row == 1 ? true : false;
     }
 }

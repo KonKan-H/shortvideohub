@@ -1,8 +1,10 @@
 package com.zzh.shortvideohub.controller;
 import com.alibaba.fastjson.JSONObject;
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import com.zzh.shortvideohub.pojo.Result;
 import com.zzh.shortvideohub.pojo.UserInfo;
 import com.zzh.shortvideohub.pojo.Video;
+import com.zzh.shortvideohub.service.UserService;
 import com.zzh.shortvideohub.service.VideoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -25,7 +27,7 @@ public class VideoController {
      * 取得初始化视频列表
      * @return
      */
-    @RequestMapping(value = "/v1/video/api", method = RequestMethod.POST)
+    @RequestMapping(value = "/v1/video/init/api", method = RequestMethod.POST)
     public Result<List<Video>> getInitVideoList(@RequestBody UserInfo userInfo) {
         List<Video> videoList = videoService.getInitVideoList(userInfo);
         if(videoList == null || videoList.size() ==0) {
@@ -53,7 +55,7 @@ public class VideoController {
      * @param video
      * @return
      */
-    @RequestMapping(value = "v1/video/api", method = RequestMethod.PUT)
+    @RequestMapping(value = "/v1/video/api", method = RequestMethod.PUT)
     public  Result<Integer> updateVideo(@RequestBody Video video) {
         int key = videoService.updateVideo(video);
         if(key != 1) {
@@ -67,9 +69,20 @@ public class VideoController {
      * @param video
      * @return
      */
-    @RequestMapping(value = "v1/like/api", method = RequestMethod.POST)
+    @RequestMapping(value = "/v1/like/api", method = RequestMethod.POST)
     public Result<Boolean> getVideoLikeOrNot(@RequestBody Video video) {
         Boolean flag = videoService.getVideoLikeOrNot(video);
         return new Result<Boolean>(1, flag, "操作成功");
+    }
+
+    /**
+     * 删除视频
+     * @param video
+     * @return
+     */
+    @RequestMapping(value = "/v1/video/delete/api", method = RequestMethod.POST)
+    public Result<Boolean> deleteVideo(@RequestBody Video video) {
+        Boolean flag = videoService.deleteVideo(video);
+        return new Result<>(1, flag, "操作成功");
     }
 }

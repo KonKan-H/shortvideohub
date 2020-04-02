@@ -38,4 +38,11 @@ public interface IVideoService {
      * @return
      */
     Boolean getVideoLikeOrNot(Video video);
+
+    /**
+     * 删除视频
+     * @param video
+     * @return
+     */
+    Boolean deleteVideo(Video video);
 }
