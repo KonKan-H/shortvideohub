@@ -3,7 +3,6 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.zzh.shortvideohub.mapper.UserMapper">
-
     <!-- 根据手机号查询用户 -->
     <select id="getUserByMP" resultType="com.zzh.shortvideohub.pojo.User">
         select * from sv_user where mobile_phone = #{user.mobilePhone};
@@ -22,8 +21,9 @@
 
     <!-- 创建默认用户信息 -->
     <insert id="insertUserInfo">
-        insert into user_info (user_id, user_name, mobile_phone, fans, attentions, age)
-        values(#{user.id}, #{user.userName}, #{user.mobilePhone}, 0, 0, 0);
+        insert into user_info (user_id, user_name, mobile_phone, fans, attentions, age, sex)
+        values(#{userInfo.id}, #{userInfo.userName}, #{userInfo.mobilePhone}, #{userInfo.fans},
+        #{userInfo.attentions}, #{userInfo.age}, #{userInfo.sex});
     </insert>
 
     <!-- 取得用户具体信息 -->
@@ -106,5 +106,15 @@
     <!-- 取得关注数和粉丝数 -->
     <select id="getUserFansAndAttention" resultType="com.zzh.shortvideohub.pojo.AttentionsFans">
         select fans, attentions from user_info where user_id = #{userInfo.userId};
+    </select>
+
+    <!-- 取得粉丝列表 -->
+    <select id="getFansList" resultType="com.zzh.shortvideohub.pojo.UserInfo">
+        SELECT * from user_info where user_id in (SELECT fans_id from attention_info where user_id = #{userInfo.userId});
+    </select>
+
+    <!-- 取得关注列表 -->
+    <select id="getAttentionsList" resultType="com.zzh.shortvideohub.pojo.UserInfo">
+        select * from user_info where user_id in (select user_id from attention_info where fans_id = #{userInfo.userId});
     </select>
 </mapper>

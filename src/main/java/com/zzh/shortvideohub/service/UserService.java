@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.security.NoSuchAlgorithmException;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author zzh
@@ -45,7 +46,11 @@ public class UserService implements IUserService {
         userInfo.setUserId(user.getId());
         userInfo.setUserName(user.getUserName());
         userInfo.setMobilePhone(user.getMobilePhone());
-        int row = userMapper.insertUserInfo(user);
+        userInfo.setSex("男");
+        userInfo.setFans(0);
+        userInfo.setAttentions(0);
+        userInfo.setAge(18);
+        int row = userMapper.insertUserInfo(userInfo);
         log.info("用户" + user.getMobilePhone() + "于" + new Date() + "注册");
         return 1;
     }
@@ -149,6 +154,28 @@ public class UserService implements IUserService {
         //减少关注数
         userMapper.decreaseAttentionNum(attention);
         return row == 1 ? true : false;
+    }
+
+    /**
+     * 取得粉丝列表
+     * @param userInfo
+     * @return
+     */
+    @Override
+    public List<UserInfo> getFansList(UserInfo userInfo) {
+        List<UserInfo> userInfoList = userMapper.getFansList(userInfo);
+        return userInfoList;
+    }
+
+    /**
+     * 取得关注列表
+     * @param userInfo
+     * @return
+     */
+    @Override
+    public List<UserInfo> getAttentionsList(UserInfo userInfo) {
+        List<UserInfo> userInfoList = userMapper.getAttentionsList(userInfo);
+        return userInfoList;
     }
 
     /**

@@ -10,9 +10,9 @@
             v.create_time createTime, v.url url, v.cover cover, v.description description, v.likes likes,
             v.duration duration, v.downloads downloads, v.comments comments from video v
         LEFT JOIN user_info u on u.user_id = v.author_id
-        <if test="userInfo.id != null">
+        <if test="userInfo.userId != null">
             <where>
-                author_id = #{userInfo.id}
+                author_id = #{userInfo.userId}
             </where>
         </if>
         order by create_time desc limit 20;

@@ -7,6 +7,8 @@ import com.zzh.shortvideohub.pojo.UserInfo;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 /**
  * @author zzh
  * @date 2020/2/28 16:32
@@ -40,10 +42,10 @@ public interface UserMapper {
     /**
      * 创建默认用户信息
      *
-     * @param user
+     * @param userInfo
      * @return
      */
-    int insertUserInfo(@Param("user") User user);
+    int insertUserInfo(@Param("userInfo") UserInfo userInfo);
 
     /**
      * 取得用户具体信息
@@ -127,6 +129,7 @@ public interface UserMapper {
 
     /**
      * 减少关注数
+     *
      * @param attention
      * @return
      */
@@ -148,4 +151,18 @@ public interface UserMapper {
      */
     int cancelAttentionUser(@Param("attention") Attention attention);
 
+    /**
+     * 取得粉丝列表
+     *
+     * @param userInfo
+     * @return
+     */
+    List<UserInfo> getFansList(@Param("userInfo") UserInfo userInfo);
+
+    /**
+     * 取得关注列表
+     * @param userInfo
+     * @return
+     */
+    List<UserInfo> getAttentionsList(@Param("userInfo") UserInfo userInfo);
 }

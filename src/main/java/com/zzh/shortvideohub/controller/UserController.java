@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.security.NoSuchAlgorithmException;
+import java.util.List;
 
 /**
  * @author zzh
@@ -135,5 +136,27 @@ public class UserController {
     public Result<AttentionsFans> getUserFansAndAttention(@RequestBody UserInfo userInfo) {
         AttentionsFans attentionsFans = userService.getUserFansAndAttention(userInfo);
         return new Result<>(1, attentionsFans, "查询成功");
+    }
+
+    /**
+     * 取得粉丝列表
+     * @param userInfo
+     * @return
+     */
+    @RequestMapping(value = "/v1/fans/list/api", method = RequestMethod.POST)
+    public Result<List<UserInfo>> getFansList(@RequestBody UserInfo userInfo) {
+        List<UserInfo> userInfoList = userService.getFansList(userInfo);
+        return new Result<>(1, userInfoList, "操作成功");
+    }
+
+    /**
+     * 取得关注列表
+     * @param userInfo
+     * @return
+     */
+    @RequestMapping(value = "/v1/attentions/list/api", method = RequestMethod.POST)
+    public Result<List<UserInfo>> getAttentionsList(@RequestBody UserInfo userInfo) {
+        List<UserInfo> userInfoList = userService.getAttentionsList(userInfo);
+        return new Result<>(1, userInfoList, "操作成功");
     }
 }

@@ -93,6 +93,11 @@ public class VideoService implements IVideoService {
         return flag;
     }
 
+    /**
+     * 删除视频
+     * @param video
+     * @return
+     */
     @Override
     public Boolean deleteVideo(Video video) {
         int row = videoMapper.deleteVideo(video);

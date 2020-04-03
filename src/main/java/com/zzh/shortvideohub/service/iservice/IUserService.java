@@ -3,6 +3,7 @@ package com.zzh.shortvideohub.service.iservice;
 import com.zzh.shortvideohub.pojo.*;
 
 import java.security.NoSuchAlgorithmException;
+import java.util.List;
 
 /**
  * @author zzh
@@ -72,4 +73,18 @@ public interface IUserService {
      * @return
      */
     Boolean cancelAttentionUser(Attention attention);
+
+    /**
+     * 取得粉丝列表
+     * @param userInfo
+     * @return
+     */
+    List<UserInfo> getFansList(UserInfo userInfo);
+
+    /**
+     * 取得关注列表
+     * @param userInfo
+     * @return
+     */
+    List<UserInfo> getAttentionsList(UserInfo userInfo);
 }
