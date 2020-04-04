@@ -52,4 +52,11 @@ public interface IVideoService {
      * @return
      */
     List<Video> getFavoriteVideo(UserInfo userInfo);
+
+    /**
+     * 取得关注用户的视频
+     * @param userInfo
+     * @return
+     */
+    List<Video> getFollowingVideo(UserInfo userInfo);
 }

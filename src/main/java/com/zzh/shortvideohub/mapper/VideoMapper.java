@@ -63,8 +63,16 @@ public interface VideoMapper {
 
     /**
      * 取得用户点赞视频
+     *
      * @param userInfo
      * @return
      */
     List<Video> getFavoriteVideo(@Param("userInfo") UserInfo userInfo);
+
+    /**
+     * 取得关注用户的视频
+     * @param userInfo
+     * @return
+     */
+    List<Video> getFollowingVideo(@Param("userInfo") UserInfo userInfo);
 }

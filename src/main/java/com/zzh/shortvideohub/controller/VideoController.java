@@ -1,10 +1,9 @@
 package com.zzh.shortvideohub.controller;
+
 import com.alibaba.fastjson.JSONObject;
-import com.sun.org.apache.xpath.internal.operations.Bool;
 import com.zzh.shortvideohub.pojo.Result;
 import com.zzh.shortvideohub.pojo.UserInfo;
 import com.zzh.shortvideohub.pojo.Video;
-import com.zzh.shortvideohub.service.UserService;
 import com.zzh.shortvideohub.service.VideoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -94,6 +93,17 @@ public class VideoController {
     @RequestMapping(value = "/v1/favorite/video/api", method = RequestMethod.POST)
     public Result<List<Video>> getFavoriteVideo(@RequestBody UserInfo userInfo) {
         List<Video> videoList = videoService.getFavoriteVideo(userInfo);
+        return new Result<>(1, videoList, "操作成功");
+    }
+
+    /**
+     * 取得关注用户的视频
+     * @param userInfo
+     * @return
+     */
+    @RequestMapping(value = "/v1/following/video/api", method = RequestMethod.POST)
+    public Result<List<Video>> getFollowingVideo(@RequestBody UserInfo userInfo) {
+        List<Video> videoList = videoService.getFollowingVideo(userInfo);
         return new Result<>(1, videoList, "操作成功");
     }
 }

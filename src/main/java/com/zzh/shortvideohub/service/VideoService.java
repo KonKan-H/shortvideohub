@@ -1,8 +1,6 @@
 package com.zzh.shortvideohub.service;
 
 import com.alibaba.fastjson.JSONObject;
-import com.sun.org.apache.xpath.internal.operations.Bool;
-import com.zzh.shortvideohub.mapper.UserMapper;
 import com.zzh.shortvideohub.mapper.VideoMapper;
 import com.zzh.shortvideohub.pojo.UserInfo;
 import com.zzh.shortvideohub.pojo.Video;
@@ -112,6 +110,17 @@ public class VideoService implements IVideoService {
     @Override
     public List<Video> getFavoriteVideo(UserInfo userInfo) {
         List<Video> videoList = videoMapper.getFavoriteVideo(userInfo);
+        return videoList;
+    }
+
+    /**
+     * 取得关注用户的视频
+     * @param userInfo
+     * @return
+     */
+    @Override
+    public List<Video> getFollowingVideo(UserInfo userInfo) {
+        List<Video> videoList = videoMapper.getFollowingVideo(userInfo);
         return videoList;
     }
 }
