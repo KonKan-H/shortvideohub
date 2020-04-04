@@ -103,4 +103,15 @@ public class VideoService implements IVideoService {
         int row = videoMapper.deleteVideo(video);
         return row == 1 ? true : false;
     }
+
+    /**
+     * 取得用户点赞视频
+     * @param userInfo
+     * @return
+     */
+    @Override
+    public List<Video> getFavoriteVideo(UserInfo userInfo) {
+        List<Video> videoList = videoMapper.getFavoriteVideo(userInfo);
+        return videoList;
+    }
 }

@@ -45,4 +45,11 @@ public interface IVideoService {
      * @return
      */
     Boolean deleteVideo(Video video);
+
+    /**
+     * 取得用户点赞视频
+     * @param userInfo
+     * @return
+     */
+    List<Video> getFavoriteVideo(UserInfo userInfo);
 }

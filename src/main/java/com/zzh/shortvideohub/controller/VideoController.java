@@ -85,4 +85,15 @@ public class VideoController {
         Boolean flag = videoService.deleteVideo(video);
         return new Result<>(1, flag, "操作成功");
     }
+
+    /**
+     * 取得用户点赞视频
+     * @param userInfo
+     * @return
+     */
+    @RequestMapping(value = "/v1/favorite/video/api", method = RequestMethod.POST)
+    public Result<List<Video>> getFavoriteVideo(@RequestBody UserInfo userInfo) {
+        List<Video> videoList = videoService.getFavoriteVideo(userInfo);
+        return new Result<>(1, videoList, "操作成功");
+    }
 }

@@ -55,8 +55,16 @@ public interface VideoMapper {
 
     /**
      * 删除视频
+     *
      * @param video
      * @return
      */
     int deleteVideo(@Param("video") Video video);
+
+    /**
+     * 取得用户点赞视频
+     * @param userInfo
+     * @return
+     */
+    List<Video> getFavoriteVideo(@Param("userInfo") UserInfo userInfo);
 }
