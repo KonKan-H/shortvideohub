@@ -1,5 +1,6 @@
 package com.zzh.shortvideohub.controller;
 
+import com.alibaba.fastjson.JSONObject;
 import com.zzh.shortvideohub.pojo.Result;
 import com.zzh.shortvideohub.service.FileService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,5 +31,15 @@ public class FileController {
         String uri = fileService.uploadFile(multipartFile);
         Result<String> result = new Result<String>(1, uri, "头像上传成功");
         return result;
+    }
+
+    /**
+     * 上传视频
+     * @param jsonObject
+     * @return
+     */
+    @RequestMapping(value = "/v1/videoInfo/api", method = RequestMethod.POST)
+    public Result<String> uploadVideoInfo(JSONObject jsonObject) {
+        return null;
     }
 }
