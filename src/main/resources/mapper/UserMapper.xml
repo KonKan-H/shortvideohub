@@ -22,7 +22,7 @@
     <!-- 创建默认用户信息 -->
     <insert id="insertUserInfo">
         insert into user_info (user_id, user_name, mobile_phone, fans, attentions, age, sex)
-        values(#{userInfo.id}, #{userInfo.userName}, #{userInfo.mobilePhone}, #{userInfo.fans},
+        values(#{userInfo.userId}, #{userInfo.userName}, #{userInfo.mobilePhone}, #{userInfo.fans},
         #{userInfo.attentions}, #{userInfo.age}, #{userInfo.sex});
     </insert>
 

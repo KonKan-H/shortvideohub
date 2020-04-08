@@ -25,6 +25,7 @@
             <if test="video.likes != null">likes = #{video.likes},</if>
             <if test="video.comments != null">comments = #{video.comments},</if>
             <if test="video.downloads != null ">downloads = #{video.downloads},</if>
+            <if test="video.description != null">description = #{video.description}</if>
         </set>
         where id = #{video.id}
     </update>
@@ -69,4 +70,10 @@
         where v.author_id in (select attention_info.user_id from attention_info where attention_info.fans_id = #{userInfo.userId})
         order by v.create_time desc;
     </select>
+
+    <!-- 插入视频 -->
+    <insert id="insertVideo">
+        insert into video (author_id, create_time, url, cover, description)
+        VALUES (#{video.authorId}, #{video.createTime}, #{video.url}, #{video.cover}, #{video.description})
+    </insert>
 </mapper>

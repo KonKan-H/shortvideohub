@@ -1,13 +1,22 @@
 package com.zzh.shortvideohub.service;
 
+import com.zzh.shortvideohub.ConstantCache.ConstantCache;
+import com.zzh.shortvideohub.mapper.VideoMapper;
+import com.zzh.shortvideohub.pojo.UserInfo;
+import com.zzh.shortvideohub.pojo.Video;
 import com.zzh.shortvideohub.service.iservice.IFileService;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.tomcat.util.bcel.classfile.Constant;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author zzh
@@ -18,12 +27,20 @@ import java.io.IOException;
 @Slf4j
 public class FileService implements IFileService {
 
+    @Autowired
+    private VideoMapper videoMapper;
+
+    /**
+     * 上传视频
+     * @param multipartFile
+     * @return
+     */
     @Override
     public String uploadFile(MultipartFile multipartFile){
         //获取前端上传的文件名称
         String multifilename = multipartFile.getOriginalFilename();
         //String uri = request.getSession().getServletContext().getRealPath("/");
-        String uri = "D:/files";
+        String uri = ConstantCache.FILE_URI + "avatar";
         String url = uri+ "/" +  multifilename;
         //在项目新建一个 你重新生成名称的文件
         File file = new File(url);
@@ -34,5 +51,39 @@ public class FileService implements IFileService {
             e.printStackTrace();
         }
         return url;
+    }
+
+    /**
+     * 上传视频
+     * @param videoMultipartFile
+     * @param coverMultipartFile
+     * @param description
+     * @return
+     */
+    @Override
+    public Map<String, String> uploadVideo(MultipartFile videoMultipartFile, MultipartFile coverMultipartFile, String description, String userId) {
+        String videoName = videoMultipartFile.getOriginalFilename();
+        String coverName = coverMultipartFile.getOriginalFilename();
+        String videoUrl = ConstantCache.FILE_URI + "video" + videoName;
+        String coverUrl = ConstantCache.FILE_URI + "cover" + coverName;
+        Video video = new Video();
+        video.setUrl(videoUrl);
+        video.setCover(coverUrl);
+        video.setDescription(description);
+        video.setAuthorId(Integer.valueOf(userId));
+        video.setCreateTime(new Date());
+        //int row = videoMapper.insertVideo(video);
+        File videoFile = new File(videoUrl);
+        File coverFile = new File(coverUrl);
+        try {
+            videoMultipartFile.transferTo(videoFile);
+            coverMultipartFile.transferTo(coverFile);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Map<String, String> map = new HashMap<>();
+        map.put("videoUrl" , videoUrl);
+        map.put("coverUrl" , coverUrl);
+        return map;
     }
 }

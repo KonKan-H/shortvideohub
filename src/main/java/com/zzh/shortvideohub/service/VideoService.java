@@ -63,7 +63,7 @@ public class VideoService implements IVideoService {
     }
 
     /**
-     * 更新视频下载信息
+     * 更新视频信息
      * @param video
      * @return
      */
@@ -74,7 +74,7 @@ public class VideoService implements IVideoService {
             row = videoMapper.updateVideo(video);
         } catch (Exception e) {
             log.info(e.toString());
-            log.info("下载信息更新失败，数据：" + JSONObject.toJSONString(video));
+            log.info("视频信息更新失败，数据：" + JSONObject.toJSONString(video));
         }
         return row;
     }

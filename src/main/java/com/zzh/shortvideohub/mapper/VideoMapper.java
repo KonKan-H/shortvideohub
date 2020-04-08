@@ -71,8 +71,16 @@ public interface VideoMapper {
 
     /**
      * 取得关注用户的视频
+     *
      * @param userInfo
      * @return
      */
     List<Video> getFollowingVideo(@Param("userInfo") UserInfo userInfo);
+
+    /**
+     * 插入视频信息
+     * @param video
+     * @return
+     */
+    int insertVideo(@Param("video") Video video);
 }
