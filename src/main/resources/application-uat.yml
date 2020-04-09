@@ -1,0 +1,6 @@
+spring:
+  datasource:
+    diverClassNmae: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://http://112.126.82.137:3306/short_video_db?characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull&serverTimezone=GMT%2B8&useSSL=false
+    username: short_video_db
+    password: root

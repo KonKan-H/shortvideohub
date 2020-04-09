@@ -40,7 +40,7 @@ public class FileService implements IFileService {
         //获取前端上传的文件名称
         String multifilename = multipartFile.getOriginalFilename();
         //String uri = request.getSession().getServletContext().getRealPath("/");
-        String uri = ConstantCache.FILE_URI + "avatar";
+        String uri = ConstantCache.AVATAR_FILE_URI;
         String url = uri+ "/" +  multifilename;
         //在项目新建一个 你重新生成名称的文件
         File file = new File(url);
@@ -64,15 +64,15 @@ public class FileService implements IFileService {
     public Map<String, String> uploadVideo(MultipartFile videoMultipartFile, MultipartFile coverMultipartFile, String description, String userId) {
         String videoName = videoMultipartFile.getOriginalFilename();
         String coverName = coverMultipartFile.getOriginalFilename();
-        String videoUrl = ConstantCache.FILE_URI + "video" + videoName;
-        String coverUrl = ConstantCache.FILE_URI + "cover" + coverName;
+        String videoUrl = ConstantCache.VIDEO_FILE_URI + videoName;
+        String coverUrl = ConstantCache.COVER_FILE_URI + coverName;
         Video video = new Video();
-        video.setUrl(videoUrl);
-        video.setCover(coverUrl);
+        video.setUrl(videoName);
+        video.setCover(coverName);
         video.setDescription(description);
         video.setAuthorId(Integer.valueOf(userId));
         video.setCreateTime(new Date());
-        //int row = videoMapper.insertVideo(video);
+        videoMapper.insertVideo(video);
         File videoFile = new File(videoUrl);
         File coverFile = new File(coverUrl);
         try {
