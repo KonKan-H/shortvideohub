@@ -51,7 +51,7 @@ public class VideoService implements IVideoService {
             if(isLiked) {
                 videoMapper.insertVideoLike(videoLiker);
             } else {
-                videoMapper.deleteVideoLike(videoLiker);
+                videoMapper.deletePersonVideoLike(videoLiker);
             }
             videoMapper.updateVideo(video);
         } catch (Exception e) {
@@ -99,6 +99,7 @@ public class VideoService implements IVideoService {
     @Override
     public Boolean deleteVideo(Video video) {
         int row = videoMapper.deleteVideo(video);
+        videoMapper.deleteVideoLike(video);
         return row == 1 ? true : false;
     }
 

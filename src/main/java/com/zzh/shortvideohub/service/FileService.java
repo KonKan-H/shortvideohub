@@ -72,7 +72,7 @@ public class FileService implements IFileService {
         video.setDescription(description);
         video.setAuthorId(Integer.valueOf(userId));
         video.setCreateTime(new Date());
-        videoMapper.insertVideo(video);
+        //videoMapper.insertVideo(video);
         File videoFile = new File(videoUrl);
         File coverFile = new File(coverUrl);
         try {

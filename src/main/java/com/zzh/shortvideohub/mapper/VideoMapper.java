@@ -43,7 +43,7 @@ public interface VideoMapper {
      * @param videoLiker
      * @return
      */
-    int deleteVideoLike(@Param("videoLiker") VideoLiker videoLiker);
+    int deletePersonVideoLike(@Param("videoLiker") VideoLiker videoLiker);
 
     /**
      * 判断视频是否喜欢
@@ -79,8 +79,17 @@ public interface VideoMapper {
 
     /**
      * 插入视频信息
+     *
      * @param video
      * @return
      */
     int insertVideo(@Param("video") Video video);
+
+    /**
+     * 删除视频所有喜欢
+     *
+     * @param video
+     * @return
+     */
+    int deleteVideoLike(@Param("video") Video video);
 }

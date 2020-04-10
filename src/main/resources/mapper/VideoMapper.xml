@@ -37,7 +37,7 @@
     </insert>
 
     <!-- 取消视频收藏 -->
-    <delete id="deleteVideoLike">
+    <delete id="deletePersonVideoLike">
         delete from video_liker where video_id = #{videoLiker.videoId} and liker = #{videoLiker.liker};
     </delete>
 
@@ -76,4 +76,9 @@
         insert into video (author_id, create_time, url, cover, description)
         VALUES (#{video.authorId}, #{video.createTime}, #{video.url}, #{video.cover}, #{video.description})
     </insert>
+
+    <!-- 删除视频所有喜欢 -->
+    <delete id="deleteVideoLike">
+        delete from video_liker where video_id = #{video.id};
+    </delete>
 </mapper>

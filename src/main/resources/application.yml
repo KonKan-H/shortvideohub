@@ -1,6 +1,6 @@
 spring:
   profiles:
-    active: dev
+    active: uat
   session:
     store-type: none #redis
 #  redis:
@@ -32,7 +32,7 @@ spring:
 server:
   port: 9250
   servlet:
-    context-path: /v2
+    context-path: /v3
 ---
 spring:
   profiles: dev
