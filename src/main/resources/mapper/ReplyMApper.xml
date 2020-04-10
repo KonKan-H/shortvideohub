@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zzh.shortvideohub.mapper.ReplyMapper">
+
+    <!-- 根据视频取得评论列表 -->
+    <select id="getReplyListByVideo" resultType="com.zzh.shortvideohub.pojo.Reply">
+        select r.id id, r.reply_id replyId, u.user_id replyMakerId, r.reply_video_id replyVideoId, r.video_author_id videoAuthorId,
+        u.user_avatar replyMakerAvatar,u.user_name replyMakerName, r.reply_maker_content replyContent,
+        r.reply_time replyTime, r.if_faved ifFaved from reply r
+        left join user_info u on u.user_id = r.reply_maker_id
+        where r.reply_video_id = #{video.id};
+    </select>
+</mapper>

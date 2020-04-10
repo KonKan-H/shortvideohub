@@ -15,7 +15,7 @@
                 author_id = #{userInfo.userId}
             </where>
         </if>
-        order by create_time desc limit 20;
+        order by create_time desc;
     </select>
 
     <!-- 点赞 -->
@@ -73,8 +73,9 @@
 
     <!-- 插入视频 -->
     <insert id="insertVideo">
-        insert into video (author_id, create_time, url, cover, description)
-        VALUES (#{video.authorId}, #{video.createTime}, #{video.url}, #{video.cover}, #{video.description})
+        insert into video (author_id, create_time, url, cover, description, likes, downloads, comments)
+        VALUES (#{video.authorId}, #{video.createTime}, #{video.url}, #{video.cover}, #{video.description},
+        #{video.likes}, #{video.downloads}, #{video.comments});
     </insert>
 
     <!-- 删除视频所有喜欢 -->
