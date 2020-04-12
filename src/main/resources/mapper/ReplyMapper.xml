@@ -12,4 +12,10 @@
         left join user_info u on u.user_id = r.reply_maker_id
         where r.reply_video_id = #{video.id};
     </select>
+
+    <!-- 评论视频 -->
+    <insert id="insertReply">
+        insert into reply (video_author_id, reply_video_id, reply_maker_id, reply_maker_content, reply_time, reply_id)
+        value (#{reply.videoAuthorId}, #{reply.replyVideoId}, #{reply.replyMakerId}, #{reply.replyContent}, #{reply.replyTime}, #{reply.replyId});
+    </insert>
 </mapper>

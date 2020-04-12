@@ -1,5 +1,6 @@
 package com.zzh.shortvideohub.controller;
 
+import com.zzh.shortvideohub.mapper.VideoMapper;
 import com.zzh.shortvideohub.pojo.Reply;
 import com.zzh.shortvideohub.pojo.Result;
 import com.zzh.shortvideohub.pojo.Video;
@@ -27,5 +28,16 @@ public class ReplyController {
     public Result<List<Reply>> getReplyList(@RequestBody Video video) {
         List<Reply> replyList = replyService.getReplyList(video);
         return new Result<>(1, replyList, "操作成功");
+    }
+
+    /**
+     * 评论视频
+     * @param reply
+     * @return
+     */
+    @RequestMapping(value = "/v1/reply/api", method = RequestMethod.PUT)
+    public Result<Integer> commentVideo(@RequestBody Reply reply) {
+        replyService.commentVideo(reply);
+        return null;
     }
 }

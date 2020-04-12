@@ -20,4 +20,12 @@ public interface ReplyMapper {
      * @return
      */
     List<Reply> getReplyListByVideo(@Param("video") Video video);
+
+    /**
+     * 评论视频
+     *
+     * @param reply
+     * @return
+     */
+    int insertReply(@Param("reply") Reply reply);
 }

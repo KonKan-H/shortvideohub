@@ -92,4 +92,10 @@ public interface VideoMapper {
      * @return
      */
     int deleteVideoLike(@Param("video") Video video);
+
+    /**
+     * 增加视频评论数
+     * @return
+     */
+    int addVideoComments(int videoId);
 }

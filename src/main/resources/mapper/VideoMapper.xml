@@ -82,4 +82,9 @@
     <delete id="deleteVideoLike">
         delete from video_liker where video_id = #{video.id};
     </delete>
+
+    <!-- 增加视频评论数 -->
+    <update id="addVideoComments">
+        update video set comments = comments + 1 where id = #{videoId};
+    </update>
 </mapper>

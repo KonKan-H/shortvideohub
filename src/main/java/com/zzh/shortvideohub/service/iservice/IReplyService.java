@@ -17,4 +17,11 @@ public interface IReplyService {
      * @return
      */
     List<Reply> getReplyList(Video video);
+
+    /**
+     * 评论视频
+     * @param reply
+     * @return
+     */
+    int commentVideo(Reply reply);
 }
