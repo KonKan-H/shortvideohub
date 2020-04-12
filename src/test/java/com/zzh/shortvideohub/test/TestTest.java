@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.zzh.shortvideohub.mapper.UserMapper;
 import com.zzh.shortvideohub.pojo.User;
 import com.zzh.shortvideohub.service.UserService;
+import com.zzh.shortvideohub.util.RedisService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,9 @@ public class TestTest {
     @Autowired
     private UserMapper userMapper;
 
+    @Autowired
+    private RedisService redisService;
+
     @Test
     public void md5() throws NoSuchAlgorithmException {
         MessageDigest md5 = MessageDigest.getInstance("md5");
@@ -38,6 +42,11 @@ public class TestTest {
         User user = new User();
         user.setMobilePhone("13967574627");
         System.out.println(JSONObject.toJSONString(userMapper.getUserByMP(user)));
+    }
+
+    @Test
+    public void redis() {
+        System.out.println(redisService.get("test"));
     }
 
 }

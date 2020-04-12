@@ -4,3 +4,14 @@ spring:
     url: jdbc:mysql://112.126.82.137:3306/short_video_db?characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull&serverTimezone=GMT%2B8&useSSL=false
     username: short_video_db
     password: root
+
+  redis:
+    host: 112.126.82.137
+    port: 6379
+    database: 0
+    jedis:
+      pool:
+        max-active: 80
+        max-wait: -1
+        min-idle: 1
+    timeout: 5000ms
