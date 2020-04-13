@@ -22,7 +22,7 @@ public class FileController {
     private FileService fileService;
 
     /**
-     * 上传到服务器
+     * 上传文件
      * @return
      */
     @RequestMapping(value = "/v1/file/api", method = RequestMethod.POST)
@@ -33,16 +33,29 @@ public class FileController {
     }
 
     /**
-     * 上传视频
+     * 上传视频带封面
+     * @param
+     * @return
+     */
+    @RequestMapping(value = "/v1/videoInfo/cover/api", method = RequestMethod.POST)
+    public Result<Map> uploadVideoInfo(@RequestParam(value="video") MultipartFile videoFile,
+                                          @RequestParam(value="cover") MultipartFile coverFile,
+                                          @RequestParam(value = "description") String description,
+                                          @RequestParam(value = "userId") String userId) throws IOException {
+        Map<String, String> map = fileService.uploadVideo(videoFile, coverFile, description, userId);
+        return new Result<>(1, map, "操作成功");
+    }
+
+    /**
+     * 上传视频 不带封面
      * @param
      * @return
      */
     @RequestMapping(value = "/v1/videoInfo/api", method = RequestMethod.POST)
-    public Result<Map> uploadVideoInfo(@RequestParam(value="video") MultipartFile videoFile,
-                                          @RequestParam(value="cover") MultipartFile coverFile,
-                                          @RequestParam(value = "description") String description,
-                                          @RequestParam(value = "userId") String userId) {
-        Map<String, String> map = fileService.uploadVideo(videoFile, coverFile, description, userId);
+    public Result<Map> uploadVideoInfo2(@RequestParam(value="video") MultipartFile videoFile,
+                                       @RequestParam(value = "description") String description,
+                                       @RequestParam(value = "userId") String userId) throws IOException {
+        Map<String, String> map = fileService.uploadVideo2(videoFile, description, userId);
         return new Result<>(1, map, "操作成功");
     }
 }

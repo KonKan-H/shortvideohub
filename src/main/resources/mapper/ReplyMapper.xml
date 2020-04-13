@@ -18,4 +18,9 @@
         insert into reply (video_author_id, reply_video_id, reply_maker_id, reply_maker_content, reply_time, reply_id)
         value (#{reply.videoAuthorId}, #{reply.replyVideoId}, #{reply.replyMakerId}, #{reply.replyContent}, #{reply.replyTime}, #{reply.replyId});
     </insert>
+
+    <!-- 删除视频评论 -->
+    <delete id="deleteReply">
+        delete from reply where video_author_id = #{video.id};
+    </delete>
 </mapper>

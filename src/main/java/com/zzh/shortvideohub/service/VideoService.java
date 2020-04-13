@@ -1,6 +1,7 @@
 package com.zzh.shortvideohub.service;
 
 import com.alibaba.fastjson.JSONObject;
+import com.zzh.shortvideohub.mapper.ReplyMapper;
 import com.zzh.shortvideohub.mapper.VideoMapper;
 import com.zzh.shortvideohub.pojo.UserInfo;
 import com.zzh.shortvideohub.pojo.Video;
@@ -25,6 +26,8 @@ public class VideoService implements IVideoService {
 
     @Autowired
     private VideoMapper videoMapper;
+    @Autowired
+    private ReplyMapper replyMapper;
 
     /**
      * 取得初始视频队列
@@ -100,6 +103,7 @@ public class VideoService implements IVideoService {
     public Boolean deleteVideo(Video video) {
         int row = videoMapper.deleteVideo(video);
         videoMapper.deleteVideoLike(video);
+        replyMapper.deleteReply(video);
         return row == 1 ? true : false;
     }
 

@@ -1,6 +1,7 @@
 package com.zzh.shortvideohub.test;
 
 import com.alibaba.fastjson.JSONObject;
+import com.zzh.shortvideohub.ConstantCache.ConstantCache;
 import com.zzh.shortvideohub.mapper.UserMapper;
 import com.zzh.shortvideohub.pojo.User;
 import com.zzh.shortvideohub.service.UserService;
@@ -11,9 +12,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.LineNumberReader;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.UUID;
 
 /**
  * @author zzh
@@ -47,6 +52,34 @@ public class TestTest {
     @Test
     public void redis() {
         System.out.println(redisService.get("test"));
+    }
+
+    @Test
+    public void cover() {
+        String coverName = UUID.randomUUID().toString().replace("-", "") + ".jpg";
+        try {
+            Process p = Runtime.getRuntime().exec(new String[] {
+                    "ffmpeg", "-i", ConstantCache.VIDEO_FILE_URI + "d7b0ca30-7a3e-11ea-af2e-715437bd057b.mp4",
+                    ConstantCache.VIDEO_FILE_URI + coverName
+            });
+        } catch (IOException e1) {
+            // TODO Auto-generated catch block
+            e1.printStackTrace();
+        }
+    }
+
+    @Test
+    public void video() {
+        String m3u8Name = UUID.randomUUID().toString().replace("-", "") + ".m3u8";
+        String ml = "ffmpeg -i " + ConstantCache.VIDEO_FILE_URI + "d7b0ca30-7a3e-11ea-af2e-715437bd057b.mp4" +
+                " -vcodec copy -acodec copy -hls_list_size 0 -vbsf h264_mp4toannexb " + ConstantCache.VIDEO_FILE_URI + m3u8Name;
+        System.out.println(ml);
+        try {
+            Process p = Runtime.getRuntime().exec(ml);
+        } catch (IOException e1) {
+            // TODO Auto-generated catch block
+            e1.printStackTrace();
+        }
     }
 
 }

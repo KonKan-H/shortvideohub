@@ -28,4 +28,11 @@ public interface ReplyMapper {
      * @return
      */
     int insertReply(@Param("reply") Reply reply);
+
+    /**
+     * 删除视频评论
+     * @param video
+     * @return
+     */
+    int deleteReply(@Param("video") Video video);
 }
