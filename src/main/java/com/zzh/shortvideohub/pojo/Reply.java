@@ -29,4 +29,6 @@ public class Reply {
     private Date replyTime;
     private String ifFaved;
     private List<Reply> afterReplies;
+    private Integer likes;
+    private Integer likePeople;
 }

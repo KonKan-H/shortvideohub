@@ -103,7 +103,7 @@ public class VideoService implements IVideoService {
     public Boolean deleteVideo(Video video) {
         int row = videoMapper.deleteVideo(video);
         videoMapper.deleteVideoLike(video);
-        replyMapper.deleteReply(video);
+        replyMapper.deleteReplyByVideoId(video);
         return row == 1 ? true : false;
     }
 

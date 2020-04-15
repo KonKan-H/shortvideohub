@@ -87,4 +87,9 @@
     <update id="addVideoComments">
         update video set comments = comments + 1 where id = #{videoId};
     </update>
+
+    <!-- 减少视频评论数 -->
+    <update id="decreaseComments">
+        update video set comments = comments - 1 where id = #{videoId};
+    </update>
 </mapper>

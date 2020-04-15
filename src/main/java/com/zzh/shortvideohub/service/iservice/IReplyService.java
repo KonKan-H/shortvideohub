@@ -24,4 +24,25 @@ public interface IReplyService {
      * @return
      */
     int commentVideo(Reply reply);
+
+    /**
+     * 删除视频
+     * @param reply
+     * @return
+     */
+    int deleteReply(Reply reply);
+
+    /**
+     * 点赞评论
+     * @param reply
+     * @return
+     */
+    int likeComment(Reply reply);
+
+    /**
+     * 取消点赞评论
+     * @param reply
+     * @return
+     */
+    int cancelComment(Reply reply);
 }

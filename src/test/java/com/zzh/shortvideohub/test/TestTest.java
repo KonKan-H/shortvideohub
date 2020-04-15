@@ -51,7 +51,7 @@ public class TestTest {
 
     @Test
     public void redis() {
-        System.out.println(redisService.get("test"));
+        System.out.println(redisService.exists("test"));
     }
 
     @Test
@@ -80,6 +80,12 @@ public class TestTest {
             // TODO Auto-generated catch block
             e1.printStackTrace();
         }
+    }
+
+    @Test
+    public void key() {
+        String key = ConstantCache.LIKE_COMMENT_LABEL(1, 2);
+        System.out.println(key);
     }
 
 }

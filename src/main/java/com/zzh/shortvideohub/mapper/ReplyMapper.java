@@ -30,9 +30,32 @@ public interface ReplyMapper {
     int insertReply(@Param("reply") Reply reply);
 
     /**
-     * 删除视频评论
+     * 删除视频评论 videoId
+     *
      * @param video
      * @return
      */
-    int deleteReply(@Param("video") Video video);
+    int deleteReplyByVideoId(@Param("video") Video video);
+
+    /**
+     * 删除视频评论 replyId
+     *
+     * @param reply
+     * @return
+     */
+    int deleteReplyById(@Param("reply") Reply reply);
+
+    /**
+     * 评论喜欢数加一
+     * @param reply
+     * @return
+     */
+    int addReplyLikes(@Param("reply") Reply reply);
+
+    /**
+     * 评论喜欢数加一
+     * @param reply
+     * @return
+     */
+    int decreaseReplyLikes(@Param("reply") Reply reply);
 }

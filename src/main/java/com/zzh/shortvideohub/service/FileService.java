@@ -128,22 +128,23 @@ public class FileService implements IFileService {
         try {
             Process p = Runtime.getRuntime().exec(ml);
         } catch (IOException e1) {
-            // TODO Auto-generated catch block
+            log.info("切片失败: " + ml);
             e1.printStackTrace();
         }
+        log.info("切片成功: " + ml);
         return m3u8Name;
     }
 
     public String getVideoCover(String videoUrl) {
         String coverName = UUID.randomUUID().toString().replace("-", "") + ".jpg";
         String ml = "ffmpeg -i " + videoUrl + " " + ConstantCache.COVER_FILE_URI + coverName;
-        System.out.println(ml);
         try {
             Process p = Runtime.getRuntime().exec(ml);
         } catch (IOException e1) {
-            // TODO Auto-generated catch block
+            log.info("切片失败: " + ml);
             e1.printStackTrace();
         }
+        log.info("切取封面成功: " + ml);
         return coverName;
     }
 

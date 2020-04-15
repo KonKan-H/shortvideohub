@@ -98,4 +98,11 @@ public interface VideoMapper {
      * @return
      */
     int addVideoComments(int videoId);
+
+    /**
+     * 减少视频评论数
+     * @param VideoId
+     * @return
+     */
+    int decreaseComments(int VideoId);
 }

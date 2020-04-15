@@ -8,19 +8,34 @@
     <select id="getReplyListByVideo" resultType="com.zzh.shortvideohub.pojo.Reply">
         select r.id id, r.reply_id replyId, u.user_id replyMakerId, r.reply_video_id replyVideoId, r.video_author_id videoAuthorId,
         u.user_avatar replyMakerAvatar,u.user_name replyMakerName, r.reply_maker_content replyContent,
-        r.reply_time replyTime, r.if_faved ifFaved from reply r
+        r.reply_time replyTime from reply r
         left join user_info u on u.user_id = r.reply_maker_id
         where r.reply_video_id = #{video.id};
     </select>
 
     <!-- 评论视频 -->
     <insert id="insertReply">
-        insert into reply (video_author_id, reply_video_id, reply_maker_id, reply_maker_content, reply_time, reply_id)
-        value (#{reply.videoAuthorId}, #{reply.replyVideoId}, #{reply.replyMakerId}, #{reply.replyContent}, #{reply.replyTime}, #{reply.replyId});
+        insert into reply (video_author_id, reply_video_id, reply_maker_id, reply_maker_content, reply_time, reply_id, likes)
+        value (#{reply.videoAuthorId}, #{reply.replyVideoId}, #{reply.replyMakerId}, #{reply.replyContent}, #{reply.replyTime}, #{reply.replyId}, #{reply.likes});
     </insert>
 
-    <!-- 删除视频评论 -->
-    <delete id="deleteReply">
-        delete from reply where video_author_id = #{video.id};
+    <!-- 删除视频评论 videoId -->
+    <delete id="deleteReplyByVideoId">
+        delete from reply where reply_video_id = #{video.id};
     </delete>
+
+    <!-- 删除视频评论 replyId -->
+    <delete id="deleteReplyById">
+        delete from reply where id = #{reply.id};
+    </delete>
+
+    <!-- 评论喜欢数加一 -->
+    <update id="addReplyLikes">
+        update reply set likes = likes + 1 where id = #{reply.id};
+    </update>
+
+    <!-- 评论喜欢数减一 -->
+    <update id="decreaseReplyLikes">
+        update reply set likes = likes - 1 where id = #{reply.id};
+    </update>
 </mapper>
