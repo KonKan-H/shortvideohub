@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import java.security.NoSuchAlgorithmException;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -51,7 +52,7 @@ public class UserService implements IUserService {
         userInfo.setAttentions(0);
         userInfo.setAge(18);
         int row = userMapper.insertUserInfo(userInfo);
-        log.info("用户" + user.getMobilePhone() + "于" + new Date() + "注册");
+        log.info("用户" + user.getMobilePhone() + "于" + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss") + "注册");
         return 1;
     }
 

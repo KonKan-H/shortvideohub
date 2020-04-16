@@ -39,14 +39,14 @@ public class ReplyService implements IReplyService {
     @Override
     public List<Reply> getReplyList(Video video) {
         List<Reply> replies = replyMapper.getReplyListByVideo(video);
-        for(Reply reply : replies) {
-            reply.setIfFaved("no");
-            String key = ConstantCache.LIKE_COMMENT_LABEL(reply.getId(),video.getLooker());
-            Object o = redisService.get(key);
-            if(o != null && o.toString().equals("1")) {
-                reply.setIfFaved("yes");
-            }
-        }
+//        for(Reply reply : replies) {
+//            reply.setIfFaved("no");
+//            String key = ConstantCache.LIKE_COMMENT_LABEL(reply.getId(),video.getLooker());
+//            Object o = redisService.get(key);
+//            if(o != null && o.toString().equals("1")) {
+//                reply.setIfFaved("yes");
+//            }
+//        }
         return replies;
     }
 

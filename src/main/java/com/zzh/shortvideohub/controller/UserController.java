@@ -33,9 +33,9 @@ public class UserController {
     public Result<Integer> registration(@RequestBody User user) throws NoSuchAlgorithmException {
         Integer row = userService.registerUser(user);
         if(row == 1) {
-            return new Result<Integer>(1, 1, "注册成功，返回登录页面登录");
+            return new Result<Integer>(1, 1, "操作成功");
         }
-        return new Result<Integer>(1, 0, "该手机号已经被注册");
+        return new Result<Integer>(-1, 0, "操作失败");
     }
 
     /**
