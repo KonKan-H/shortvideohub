@@ -7,7 +7,8 @@ package com.zzh.shortvideohub.ConstantCache;
  */
 public class ConstantCache {
     //文件存储位置
-    public static String FILE_URL = "D:/sv_files/";
+//    public static String FILE_URL = "D:/sv_files/";
+    public static String FILE_URL = "/var/opt/";
     public static String COVER_FILE_URI = FILE_URL + "cover/";
     public static String VIDEO_FILE_URI = FILE_URL + "video/";
     public static String AVATAR_FILE_URI = FILE_URL + "avatar/";
