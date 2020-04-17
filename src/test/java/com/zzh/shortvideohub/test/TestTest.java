@@ -9,6 +9,7 @@ import com.zzh.shortvideohub.util.RedisService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -33,6 +34,9 @@ public class TestTest {
 
     @Autowired
     private RedisService redisService;
+
+    @Value("${fileUrl.videoFileUrl}")
+    private String videoFileUrl;
 
     @Test
     public void md5() throws NoSuchAlgorithmException {
@@ -59,8 +63,8 @@ public class TestTest {
         String coverName = UUID.randomUUID().toString().replace("-", "") + ".jpg";
         try {
             Process p = Runtime.getRuntime().exec(new String[] {
-                    "ffmpeg", "-i", ConstantCache.VIDEO_FILE_URI + "d7b0ca30-7a3e-11ea-af2e-715437bd057b.mp4",
-                    ConstantCache.VIDEO_FILE_URI + coverName
+                    "ffmpeg", "-i", videoFileUrl + "d7b0ca30-7a3e-11ea-af2e-715437bd057b.mp4",
+                    videoFileUrl + coverName
             });
         } catch (IOException e1) {
             // TODO Auto-generated catch block
@@ -71,8 +75,8 @@ public class TestTest {
     @Test
     public void video() {
         String m3u8Name = UUID.randomUUID().toString().replace("-", "") + ".m3u8";
-        String ml = "ffmpeg -i " + ConstantCache.VIDEO_FILE_URI + "d7b0ca30-7a3e-11ea-af2e-715437bd057b.mp4" +
-                " -vcodec copy -acodec copy -hls_list_size 0 -vbsf h264_mp4toannexb " + ConstantCache.VIDEO_FILE_URI + m3u8Name;
+        String ml = "ffmpeg -i " + videoFileUrl + "d7b0ca30-7a3e-11ea-af2e-715437bd057b.mp4" +
+                " -vcodec copy -acodec copy -hls_list_size 0 -vbsf h264_mp4toannexb " + videoFileUrl + m3u8Name;
         System.out.println(ml);
         try {
             Process p = Runtime.getRuntime().exec(ml);
@@ -86,6 +90,11 @@ public class TestTest {
     public void key() {
         String key = ConstantCache.LIKE_COMMENT_LABEL(1, 2);
         System.out.println(key);
+    }
+
+    @Test
+    public void value() {
+        System.out.println(videoFileUrl);
     }
 
 }

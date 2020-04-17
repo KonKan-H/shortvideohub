@@ -21,4 +21,5 @@ public class UserInfo {
     private String introduction;
     private Integer fans;
     private Integer attentions;
+    private String accessToken;
 }

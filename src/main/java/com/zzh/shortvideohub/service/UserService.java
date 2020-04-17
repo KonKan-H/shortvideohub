@@ -1,17 +1,27 @@
 package com.zzh.shortvideohub.service;
 
+import com.alibaba.fastjson.JSONObject;
 import com.zzh.shortvideohub.mapper.UserMapper;
 import com.zzh.shortvideohub.pojo.*;
 import com.zzh.shortvideohub.service.iservice.IUserService;
+import com.zzh.shortvideohub.util.RedisService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.DigestUtils;
+import org.springframework.util.StringUtils;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
+
+import javax.servlet.http.HttpServletRequest;
 import java.security.NoSuchAlgorithmException;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author zzh
@@ -24,6 +34,9 @@ public class UserService implements IUserService {
 
     @Autowired
     private UserMapper userMapper;
+
+    @Autowired
+    private RedisService redisService;
 
     /**
      * 用户注册
@@ -69,13 +82,49 @@ public class UserService implements IUserService {
         if(u != null && u.getPassword().equals(user.getPassword())) {
             //密码正确则查询具体个人信息
             UserInfo userInfo = userMapper.getUserInfo(u);
-            User user1 = new User();
-            user1.setLastLoginTime(new Date());
-            user1.setId(u.getId());
-            userMapper.updateUser(user1);
+            String token = loginSuccess(userInfo);
+            userInfo.setAccessToken(token);
             return userInfo;
         }
         return null;
+    }
+
+    /**
+     * 用户登录成功
+     * @param userInfo
+     * @return
+     */
+    private String loginSuccess(UserInfo userInfo) {
+        HttpServletRequest request = ((ServletRequestAttributes)RequestContextHolder.getRequestAttributes()).getRequest();
+        String userAgent = request.getHeader("User-Agent");
+
+        User user1 = new User();
+        user1.setLastLoginTime(new Date());
+        user1.setId(userInfo.getId());
+        user1.setUserAgent(userAgent);
+        user1.setUpdateTime(new Date());
+        userMapper.updateUser(user1);
+
+        String loginToken = "";
+        loginToken += DigestUtils.md5DigestAsHex(UUID.randomUUID().toString().getBytes());
+        Object o = redisService.get(userInfo.getUserId().toString());
+
+        //检查重复登录
+        UserInfo logined = new UserInfo();
+        if(o != null) {
+           log.info("重复登录，前者登出");
+           logined = JSONObject.parseObject(JSONObject.parse(JSONObject.toJSONString(o)).toString(), UserInfo.class);
+           String token = logined.getAccessToken();
+           if(!StringUtils.isEmpty(token)) {
+               redisService.remove(token);
+               redisService.remove(userInfo.getUserId().toString());
+           }
+        }
+        //登录缓存
+        userInfo.setAccessToken(loginToken);
+        redisService.set(loginToken, JSONObject.toJSONString(userInfo), 7L, TimeUnit.DAYS);
+        redisService.set(userInfo.getUserId().toString(), JSONObject.toJSONString(userInfo), 7L, TimeUnit.DAYS);
+        return loginToken;
     }
 
     /**

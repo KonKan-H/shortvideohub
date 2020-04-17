@@ -15,3 +15,8 @@ spring:
         max-wait: -1
         min-idle: 1
     timeout: 5000ms
+
+fileUrl:
+  videoFileUrl: "D:/sv_file/video/"
+  coverFileUrl: "D:/sv_file/cover/"
+  avatarFileUrl: "D:/sv_file/avatar/"

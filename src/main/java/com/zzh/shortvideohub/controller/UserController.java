@@ -35,7 +35,7 @@ public class UserController {
         if(row == 1) {
             return new Result<Integer>(1, 1, "操作成功");
         }
-        return new Result<Integer>(-1, 0, "操作失败");
+        return new Result<Integer>(1, 0, "操作失败");
     }
 
     /**

@@ -56,6 +56,8 @@
         <set>
             <if test="user.lastLoginTime != null">last_login_time = #{user.lastLoginTime},</if>
             <if test="user.userName != null">user_name = #{user.userName},</if>
+            <if test="user.userAgent != null">user_agent = #{user.userAgent},</if>
+            <if test="user.updateTime != null">update_time = #{user.updateTime},</if>
         </set>
         <where>
             id = #{user.id};
