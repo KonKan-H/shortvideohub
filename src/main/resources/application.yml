@@ -44,7 +44,9 @@ server:
 spring:
   profiles: prod
 server:
-  port: 19025
+  port: 9025
+  servlet:
+    context-path: /v3
 
 
 

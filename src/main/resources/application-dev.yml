@@ -17,6 +17,6 @@ spring:
     timeout: 5000ms
 
 fileUrl:
-  videoFileUrl: "/var/opt/video/"
-  coverFileUrl: "/var/opt/cover/"
-  avatarFileUrl: "/var/opt/avatar/"
+  videoFileUrl: "D:/sv_file/video/"
+  coverFileUrl: "D:/sv_file/cover/"
+  avatarFileUrl: "D:/sv_file/avatar/"
