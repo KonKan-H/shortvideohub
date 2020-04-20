@@ -1,6 +1,7 @@
 package com.zzh.shortvideohub.controller;
 
 import com.alibaba.fastjson.JSONObject;
+import com.github.pagehelper.PageInfo;
 import com.zzh.shortvideohub.pojo.Result;
 import com.zzh.shortvideohub.pojo.UserInfo;
 import com.zzh.shortvideohub.pojo.Video;
@@ -27,12 +28,12 @@ public class VideoController {
      * @return
      */
     @RequestMapping(value = "/v1/video/init/api", method = RequestMethod.POST)
-    public Result<List<Video>> getInitVideoList(@RequestBody UserInfo userInfo) {
-        List<Video> videoList = videoService.getInitVideoList(userInfo);
-        if(videoList == null || videoList.size() ==0) {
+    public Result<PageInfo<Video>> getInitVideoList(@RequestBody UserInfo userInfo) {
+        PageInfo<Video> videoList = videoService.getInitVideoList(userInfo);
+        if(videoList == null || videoList.getList().size() ==0) {
             return new Result<>(0, null, "视频为空");
         }
-        return new Result<List<Video>>(1, videoList, "为您推荐" + videoList.size() + "条视频");
+        return new Result<PageInfo<Video>>(1, videoList, "为您推荐" + videoList.getList().size() + "条视频");
     }
 
     /**
@@ -102,8 +103,8 @@ public class VideoController {
      * @return
      */
     @RequestMapping(value = "/v1/following/video/api", method = RequestMethod.POST)
-    public Result<List<Video>> getFollowingVideo(@RequestBody UserInfo userInfo) {
-        List<Video> videoList = videoService.getFollowingVideo(userInfo);
+    public Result<PageInfo<Video>> getFollowingVideo(@RequestBody UserInfo userInfo) {
+        PageInfo<Video> videoList = videoService.getFollowingVideo(userInfo);
         return new Result<>(1, videoList, "操作成功");
     }
 }

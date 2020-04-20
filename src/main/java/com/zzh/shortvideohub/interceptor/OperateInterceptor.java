@@ -22,7 +22,6 @@ import javax.servlet.http.HttpServletResponse;
 @Component
 @Slf4j
 public class OperateInterceptor implements HandlerInterceptor {
-
     @Autowired
     private RedisService redisService;
 
@@ -63,7 +62,6 @@ public class OperateInterceptor implements HandlerInterceptor {
     }
 
     /**
-     * 请求处理完成之后调用
      * @param request
      * @param response
      * @param handler

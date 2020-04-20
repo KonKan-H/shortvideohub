@@ -1,6 +1,8 @@
 package com.zzh.shortvideohub.service;
 
 import com.alibaba.fastjson.JSONObject;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.zzh.shortvideohub.mapper.ReplyMapper;
 import com.zzh.shortvideohub.mapper.VideoMapper;
 import com.zzh.shortvideohub.pojo.UserInfo;
@@ -34,9 +36,14 @@ public class VideoService implements IVideoService {
      * @return
      */
     @Override
-    public List<Video> getInitVideoList(UserInfo userInfo) {
+    public PageInfo<Video> getInitVideoList(UserInfo userInfo) {
+        PageHelper.startPage(userInfo.getCurrentPage(), userInfo.getPageSize());
         List<Video> videoList = videoMapper.getInitVideoList(userInfo);
-        return videoList;
+        PageInfo<Video> pageInfo = new PageInfo<Video>(videoList);
+        if(userInfo.getCurrentPage() > pageInfo.getPages()) {
+            pageInfo = null;
+        }
+        return pageInfo;
     }
 
     /**
@@ -124,8 +131,13 @@ public class VideoService implements IVideoService {
      * @return
      */
     @Override
-    public List<Video> getFollowingVideo(UserInfo userInfo) {
+    public PageInfo<Video> getFollowingVideo(UserInfo userInfo) {
+        PageHelper.startPage(userInfo.getCurrentPage(), userInfo.getPageSize());
         List<Video> videoList = videoMapper.getFollowingVideo(userInfo);
-        return videoList;
+        PageInfo<Video> pageInfo = new PageInfo<>(videoList);
+        if(userInfo.getCurrentPage() > pageInfo.getPages()) {
+            pageInfo = null;
+        }
+        return pageInfo;
     }
 }

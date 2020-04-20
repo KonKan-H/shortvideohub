@@ -1,13 +1,12 @@
 package com.zzh.shortvideohub.controller;
 
+import com.alibaba.fastjson.JSONObject;
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import com.zzh.shortvideohub.pojo.*;
 import com.zzh.shortvideohub.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.security.NoSuchAlgorithmException;
 import java.util.List;
@@ -158,5 +157,15 @@ public class UserController {
     public Result<List<UserInfo>> getAttentionsList(@RequestBody UserInfo userInfo) {
         List<UserInfo> userInfoList = userService.getAttentionsList(userInfo);
         return new Result<>(1, userInfoList, "操作成功");
+    }
+
+    /**
+     * 管理员登录
+     * @param jsonObject
+     * @return
+     */
+    @PostMapping(value = "/v1/admin/api")
+    public Boolean get(JSONObject jsonObject) {
+        return true;
     }
 }

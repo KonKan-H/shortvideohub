@@ -15,7 +15,7 @@
                 author_id = #{userInfo.userId}
             </where>
         </if>
-        order by create_time desc;
+        order by create_time desc
     </select>
 
     <!-- 点赞 -->
@@ -68,7 +68,7 @@
             v.duration duration, v.downloads downloads, v.comments comments from video v
         left join user_info u on v.author_id = u.user_id
         where v.author_id in (select attention_info.user_id from attention_info where attention_info.fans_id = #{userInfo.userId})
-        order by v.create_time desc;
+        order by v.create_time desc
     </select>
 
     <!-- 插入视频 -->

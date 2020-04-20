@@ -13,7 +13,7 @@ import java.util.Date;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Video {
+public class Video extends PageBase {
     private Integer id;
     private Integer authorId;
     private String authorName;

@@ -1,15 +1,13 @@
 package com.zzh.shortvideohub.pojo;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 /**
  * @author zzh
  * @date 2020/3/7 16:09
  */
 @Data
-public class UserInfo {
+public class UserInfo extends PageBase {
     private Integer id;
     private Integer userId;
     private Integer age;
