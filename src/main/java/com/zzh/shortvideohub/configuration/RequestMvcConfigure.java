@@ -29,7 +29,8 @@ public class RequestMvcConfigure implements WebMvcConfigurer {
                 .excludePathPatterns("/v1/password/api")
                 .excludePathPatterns("/v1/video/api")
                 .excludePathPatterns("/v1/following/video/api")
-                .excludePathPatterns("/v1/admin/api");
+                .excludePathPatterns("/v1/admin/api")
+                .excludePathPatterns("/v1/hot/video/api");
     }
 
     @Override

@@ -48,4 +48,9 @@ public class Video extends PageBase {
      * 观看人
      */
     private Integer looker;
+
+    /**
+     * 热度
+     */
+    private Integer hot;
 }

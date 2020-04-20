@@ -26,3 +26,5 @@ task:
     cron: "0 0 0 * * ? "
   videoLikesCommentsNumUpdate:
     cron: "0 0 1 * * ? "
+  videoHot:
+    cron: "0 0 0/1 * * ? "

@@ -124,7 +124,21 @@ public interface VideoMapper {
 
     /**
      * 同步视频的评论数
+     *
      * @param videos
      */
     void syncVideoComments(@Param("videos") List<Video> videos);
+
+    /**
+     * 视频热度
+     * @param videos
+     */
+    void videoHotUpdate(@Param("videos") List<Video> videos);
+
+    /**
+     * 取得热门视频
+     * @return
+     */
+    List<Video> getHotVideo();
+
 }

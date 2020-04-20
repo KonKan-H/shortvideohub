@@ -2,15 +2,14 @@ package com.zzh.shortvideohub.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.PageInfo;
+import com.zzh.shortvideohub.pojo.PageBase;
 import com.zzh.shortvideohub.pojo.Result;
 import com.zzh.shortvideohub.pojo.UserInfo;
 import com.zzh.shortvideohub.pojo.Video;
 import com.zzh.shortvideohub.service.VideoService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
 /**
@@ -106,5 +105,11 @@ public class VideoController {
     public Result<PageInfo<Video>> getFollowingVideo(@RequestBody UserInfo userInfo) {
         PageInfo<Video> videoList = videoService.getFollowingVideo(userInfo);
         return new Result<>(1, videoList, "操作成功");
+    }
+
+    @GetMapping(value = "/v1/hot/video/api")
+    public Result<PageInfo<Video>> getHotVideo(@RequestBody PageBase pageBase) {
+        PageInfo<Video> videoPageInfo = videoService.getHotVideo(pageBase);
+        return new Result<>(1, videoPageInfo, "操作成功");
     }
 }

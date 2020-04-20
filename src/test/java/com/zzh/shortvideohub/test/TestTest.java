@@ -112,4 +112,9 @@ public class TestTest {
         videoService.videoLCNumUpdate();
     }
 
+    @Test
+    public void hotVideo() {
+        videoService.videoHotSync();
+    }
+
 }

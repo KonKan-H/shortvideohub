@@ -2,6 +2,7 @@ package com.zzh.shortvideohub.service.iservice;
 
 import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.PageInfo;
+import com.zzh.shortvideohub.pojo.PageBase;
 import com.zzh.shortvideohub.pojo.UserInfo;
 import com.zzh.shortvideohub.pojo.Video;
 
@@ -66,4 +67,14 @@ public interface IVideoService {
      */
     void videoLCNumUpdate();
 
+    /**
+     * 视频热度同步
+     */
+    void videoHotSync();
+
+    /**
+     * 取得热门视频
+     * @return
+     */
+    PageInfo<Video> getHotVideo(PageBase pageBase);
 }

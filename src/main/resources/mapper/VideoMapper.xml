@@ -113,4 +113,16 @@
             where id = #{i.id}
         </foreach>
     </update>
+
+    <!-- 视频热度 -->
+    <update id="videoHotUpdate">
+        <foreach collection="videos" separator=";" item="i">
+            update video set hot = #{i.hot} where id = #{i.id}
+        </foreach>
+    </update>
+
+    <!-- 取得热门视频 -->
+    <select id="getHotVideo" resultType="com.zzh.shortvideohub.pojo.Video">
+        select * from video order by hot desc
+    </select>
 </mapper>

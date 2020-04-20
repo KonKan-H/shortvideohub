@@ -5,6 +5,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.zzh.shortvideohub.mapper.ReplyMapper;
 import com.zzh.shortvideohub.mapper.VideoMapper;
+import com.zzh.shortvideohub.pojo.PageBase;
 import com.zzh.shortvideohub.pojo.UserInfo;
 import com.zzh.shortvideohub.pojo.Video;
 import com.zzh.shortvideohub.pojo.VideoLiker;
@@ -149,5 +150,30 @@ public class VideoService implements IVideoService {
         List<Video> videos = videoMapper.getAllVideos();
         videoMapper.syncVideoLikes(videos);
         videoMapper.syncVideoComments(videos);
+    }
+
+    /**
+     * 视频热度同步
+     */
+    @Override
+    public void videoHotSync() {
+        List<Video> videos = videoMapper.getAllVideos();
+        for(Video video : videos) {
+            int hot = video.getLikes() * 1 + video.getComments() * 2;
+            video.setHot(hot);
+        }
+        videoMapper.videoHotUpdate(videos);
+    }
+
+    /**
+     * 取得热门视频
+     * @return
+     */
+    @Override
+    public PageInfo<Video> getHotVideo(PageBase pageBase) {
+        PageHelper.startPage(pageBase.getCurrentPage(), pageBase.getPageSize());
+        List<Video> videos = videoMapper.getHotVideo();
+        PageInfo<Video> pageInfo = new PageInfo<>(videos);
+        return pageInfo;
     }
 }
