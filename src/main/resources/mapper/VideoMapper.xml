@@ -123,6 +123,10 @@
 
     <!-- 取得热门视频 -->
     <select id="getHotVideo" resultType="com.zzh.shortvideohub.pojo.Video">
-        select * from video order by hot desc
+        select v.id id, v.author_id authorId, u.user_name authorName, u.user_avatar authorAvatar,
+            v.create_time createTime, v.url url, v.cover cover, v.description description, v.likes likes,
+            v.duration duration, v.downloads downloads, v.comments comments from video v
+        left join user_info u on v.author_id = u.user_id
+        order by hot desc
     </select>
 </mapper>

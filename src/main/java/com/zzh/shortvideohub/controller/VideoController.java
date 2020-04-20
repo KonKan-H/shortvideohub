@@ -107,7 +107,7 @@ public class VideoController {
         return new Result<>(1, videoList, "操作成功");
     }
 
-    @GetMapping(value = "/v1/hot/video/api")
+    @PostMapping(value = "/v1/hot/video/api")
     public Result<PageInfo<Video>> getHotVideo(@RequestBody PageBase pageBase) {
         PageInfo<Video> videoPageInfo = videoService.getHotVideo(pageBase);
         return new Result<>(1, videoPageInfo, "操作成功");
