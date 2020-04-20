@@ -87,4 +87,9 @@ public interface IUserService {
      * @return
      */
     List<UserInfo> getAttentionsList(UserInfo userInfo);
+
+    /**
+     * 用户粉丝数关注数同步任务
+     */
+    void faNumSyncTask();
 }

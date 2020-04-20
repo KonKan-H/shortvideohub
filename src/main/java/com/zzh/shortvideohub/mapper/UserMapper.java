@@ -161,8 +161,28 @@ public interface UserMapper {
 
     /**
      * 取得关注列表
+     *
      * @param userInfo
      * @return
      */
     List<UserInfo> getAttentionsList(@Param("userInfo") UserInfo userInfo);
+
+    /**
+     * 取得所有用户
+     *
+     * @return
+     */
+    List<UserInfo> getAllUserInfo();
+
+    /**
+     * 用户粉丝数更新
+     */
+    void fansNumUpdate(@Param("userInfos") List<UserInfo> userInfos);
+
+    /**
+     * 用户关注数更新
+     *
+     * @param userInfos
+     */
+    void attentionsNumUpdate(@Param("userInfos") List<UserInfo> userInfos);
 }

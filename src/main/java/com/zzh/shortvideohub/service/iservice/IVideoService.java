@@ -60,4 +60,10 @@ public interface IVideoService {
      * @return
      */
     PageInfo<Video> getFollowingVideo(UserInfo userInfo);
+
+    /**
+     * 视频点赞数评论数同步
+     */
+    void videoLCNumUpdate();
+
 }

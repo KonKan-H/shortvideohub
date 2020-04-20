@@ -140,4 +140,14 @@ public class VideoService implements IVideoService {
         }
         return pageInfo;
     }
+
+    /**
+     * 视频点赞数评论数同步
+     */
+    @Override
+    public void videoLCNumUpdate() {
+        List<Video> videos = videoMapper.getAllVideos();
+        videoMapper.syncVideoLikes(videos);
+        videoMapper.syncVideoComments(videos);
+    }
 }

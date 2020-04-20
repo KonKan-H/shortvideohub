@@ -92,4 +92,25 @@
     <update id="decreaseComments">
         update video set comments = comments - 1 where id = #{videoId};
     </update>
+
+    <!-- 取得所有的视频 -->
+    <select id="getAllVideos" resultType="com.zzh.shortvideohub.pojo.Video">
+        select * from video;
+    </select>
+
+    <!-- 同步视频的点赞数 -->
+    <update id="syncVideoLikes">
+        <foreach collection="videos" separator=";" item="i">
+            update video set likes = (select count(*) from video_liker where video_id = #{i.id})
+            where id = #{i.id}
+        </foreach>
+    </update>
+
+    <!-- 同步视频的评论数 -->
+    <update id="syncVideoComments">
+        <foreach collection="videos" separator=";" item="i">
+            update video set comments = (select count(*) from reply where reply_video_id = #{i.id})
+            where id = #{i.id}
+        </foreach>
+    </update>
 </mapper>

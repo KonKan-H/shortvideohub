@@ -1,7 +1,7 @@
 spring:
   datasource:
     diverClassNmae: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/short_video_db?characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull&serverTimezone=GMT%2B8&useSSL=false
+    url: jdbc:mysql://localhost:3306/short_video_db?characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull&serverTimezone=GMT%2B8&useSSL=false&allowMultiQueries=true
     username: root
     password: root
 
@@ -20,3 +20,9 @@ fileUrl:
   videoFileUrl: "D:/sv_file/video/"
   coverFileUrl: "D:/sv_file/cover/"
   avatarFileUrl: "D:/sv_file/avatar/"
+
+task:
+  fnsAttentionsNumUpdate:
+    cron: "0 0 0 * * ? "
+  videoLikesCommentsNumUpdate:
+    cron: "0 0 1 * * ? "

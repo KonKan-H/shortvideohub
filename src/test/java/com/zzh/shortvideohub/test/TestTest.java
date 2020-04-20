@@ -1,10 +1,11 @@
 package com.zzh.shortvideohub.test;
 
 import com.alibaba.fastjson.JSONObject;
-import com.zzh.shortvideohub.ConstantCache.ConstantCache;
+import com.zzh.shortvideohub.constantCache.ConstantCache;
 import com.zzh.shortvideohub.mapper.UserMapper;
 import com.zzh.shortvideohub.pojo.User;
 import com.zzh.shortvideohub.service.UserService;
+import com.zzh.shortvideohub.service.VideoService;
 import com.zzh.shortvideohub.util.RedisService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -14,8 +15,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.LineNumberReader;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -37,6 +36,12 @@ public class TestTest {
 
     @Value("${fileUrl.videoFileUrl}")
     private String videoFileUrl;
+
+    @Autowired
+    private UserService userService;
+
+    @Autowired
+    private VideoService videoService;
 
     @Test
     public void md5() throws NoSuchAlgorithmException {
@@ -95,6 +100,16 @@ public class TestTest {
     @Test
     public void value() {
         System.out.println(videoFileUrl);
+    }
+
+    @Test
+    public void faTask() {
+        userService.faNumSyncTask();
+    }
+
+    @Test
+    public void lcTask() {
+        videoService.videoLCNumUpdate();
     }
 
 }

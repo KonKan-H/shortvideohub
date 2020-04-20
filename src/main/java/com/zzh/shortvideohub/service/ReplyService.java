@@ -1,6 +1,6 @@
 package com.zzh.shortvideohub.service;
 
-import com.zzh.shortvideohub.ConstantCache.ConstantCache;
+import com.zzh.shortvideohub.constantCache.ConstantCache;
 import com.zzh.shortvideohub.mapper.ReplyMapper;
 import com.zzh.shortvideohub.mapper.VideoMapper;
 import com.zzh.shortvideohub.pojo.Reply;
@@ -41,7 +41,7 @@ public class ReplyService implements IReplyService {
         List<Reply> replies = replyMapper.getReplyListByVideo(video);
 //        for(Reply reply : replies) {
 //            reply.setIfFaved("no");
-//            String key = ConstantCache.LIKE_COMMENT_LABEL(reply.getId(),video.getLooker());
+//            String key = constantCache.LIKE_COMMENT_LABEL(reply.getId(),video.getLooker());
 //            Object o = redisService.get(key);
 //            if(o != null && o.toString().equals("1")) {
 //                reply.setIfFaved("yes");

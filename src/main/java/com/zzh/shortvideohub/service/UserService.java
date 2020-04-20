@@ -229,6 +229,16 @@ public class UserService implements IUserService {
     }
 
     /**
+     * 用户粉丝数关注数同步任务
+     */
+    @Override
+    public void faNumSyncTask() {
+        List<UserInfo> userInfos = userMapper.getAllUserInfo();
+        userMapper.fansNumUpdate(userInfos);
+        userMapper.attentionsNumUpdate(userInfos);
+    }
+
+    /**
      * 取得关注数和粉丝数
      * @param userInfo
      * @return

@@ -119,4 +119,25 @@
     <select id="getAttentionsList" resultType="com.zzh.shortvideohub.pojo.UserInfo">
         select * from user_info where user_id in (select user_id from attention_info where fans_id = #{userInfo.userId});
     </select>
+
+    <!-- 取得所有用户 -->
+    <select id="getAllUserInfo" resultType="com.zzh.shortvideohub.pojo.UserInfo">
+        select * from user_info;
+    </select>
+
+    <!-- 用户粉丝数更新 -->
+    <update id="fansNumUpdate">
+        <foreach collection="userInfos" separator=";" index="index" item="item">
+            update user_info set fans = (select count(*) from attention_info a where a.user_id = #{item.userId})
+            where user_id = #{item.id}
+        </foreach>
+    </update>
+
+    <!-- 用户关注数更新 -->
+    <update id="attentionsNumUpdate">
+        <foreach collection="userInfos" item="item" separator=";">
+            update user_info set attentions = (select count(*) from attention_info a where a.fans_id = #{item.userId})
+            where user_id = #{item.userId}
+        </foreach>
+    </update>
 </mapper>

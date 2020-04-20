@@ -95,14 +95,36 @@ public interface VideoMapper {
 
     /**
      * 增加视频评论数
+     *
      * @return
      */
     int addVideoComments(int videoId);
 
     /**
      * 减少视频评论数
+     *
      * @param VideoId
      * @return
      */
     int decreaseComments(int VideoId);
+
+    /**
+     * 取得所有的视频
+     *
+     * @return
+     */
+    List<Video> getAllVideos();
+
+    /**
+     * 同步视频的点赞数
+     *
+     * @param videos
+     */
+    void syncVideoLikes(@Param("videos") List<Video> videos);
+
+    /**
+     * 同步视频的评论数
+     * @param videos
+     */
+    void syncVideoComments(@Param("videos") List<Video> videos);
 }
