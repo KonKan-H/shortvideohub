@@ -28,3 +28,6 @@ task:
     cron: "0 0 1 * * ? "
   videoHot:
     cron: "0 0 0/1 * * ? "
+
+logging:
+  path: "/home/zzh/shortvideohub/logs/spring-log.%d{yyyy-MM-dd}.%i.log"
