@@ -27,7 +27,7 @@ task:
   videoLikesCommentsNumUpdate:
     cron: "0 0 1 * * ? "
   videoHot:
-    cron: "0 0 0/1 * * ? "
+    cron: "0 0 1/1 * * ? "
 
 logging:
-  path: "D:/spring-log.%d{yyyy-MM-dd}.%i.log"
+  path: "D"

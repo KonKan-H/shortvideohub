@@ -3,6 +3,8 @@ package com.zzh.shortvideohub.task;
 import com.zzh.shortvideohub.service.VideoService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import sun.rmi.runtime.Log;
@@ -12,7 +14,8 @@ import sun.rmi.runtime.Log;
  * @version 1.0
  * @date 2020/4/20 15:12
  */
-@Component
+@Configuration
+@EnableScheduling
 @Slf4j
 public class VideoLCNumUpdateTask {
 
