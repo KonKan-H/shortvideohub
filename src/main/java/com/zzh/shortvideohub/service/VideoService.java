@@ -159,7 +159,7 @@ public class VideoService implements IVideoService {
     public void videoHotSync() {
         List<Video> videos = videoMapper.getAllVideos();
         for(Video video : videos) {
-            int hot = video.getLikes() * 1 + video.getComments() * 2;
+            int hot = video.getLikes() * 1 + video.getComments() * 2 + video.getDownloads() * 2;
             video.setHot(hot);
         }
         videoMapper.videoHotUpdate(videos);

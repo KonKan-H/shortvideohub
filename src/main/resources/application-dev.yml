@@ -17,9 +17,9 @@ spring:
     timeout: 5000ms
 
 fileUrl:
-  videoFileUrl: "D:/sv_file/video/"
-  coverFileUrl: "D:/sv_file/cover/"
-  avatarFileUrl: "D:/sv_file/avatar/"
+  videoFileUrl: "D:/sv_files/video/"
+  coverFileUrl: "D:/sv_files/cover/"
+  avatarFileUrl: "D:/sv_files/avatar/"
 
 task:
   fnsAttentionsNumUpdate:
@@ -30,4 +30,4 @@ task:
     cron: "0 0 0/1 * * ? "
 
 logging:
-  path: "D:/spring-log.%d{yyyy-MM-dd}.%i.log"
+  path: "D"

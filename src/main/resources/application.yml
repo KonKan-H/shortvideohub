@@ -1,6 +1,6 @@
 spring:
   profiles:
-    active: prod
+    active: uat
   session:
     store-type: none #redis
 #  redis:
