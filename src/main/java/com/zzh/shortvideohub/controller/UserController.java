@@ -161,11 +161,11 @@ public class UserController {
 
     /**
      * 管理员登录
-     * @param jsonObject
+     * @param user
      * @return
      */
-    @PostMapping(value = "/v1/admin/api")
-    public Boolean get(JSONObject jsonObject) {
+    @RequestMapping(value = "/v1/admin/api", method = RequestMethod.POST)
+    public Boolean get(@RequestBody User user) {
         return true;
     }
 }
