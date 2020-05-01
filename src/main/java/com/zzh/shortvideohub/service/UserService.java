@@ -1,6 +1,7 @@
 package com.zzh.shortvideohub.service;
 
 import com.alibaba.fastjson.JSONObject;
+import com.zzh.shortvideohub.constantCache.ConstantCache;
 import com.zzh.shortvideohub.mapper.UserMapper;
 import com.zzh.shortvideohub.pojo.*;
 import com.zzh.shortvideohub.service.iservice.IUserService;
@@ -60,6 +61,7 @@ public class UserService implements IUserService {
         userInfo.setUserId(user.getId());
         userInfo.setUserName(user.getUserName());
         userInfo.setMobilePhone(user.getMobilePhone());
+        userInfo.setUserAvatar(ConstantCache.INIT_AVATAR);
         userInfo.setSex("男");
         userInfo.setFans(0);
         userInfo.setAttentions(0);
@@ -135,7 +137,6 @@ public class UserService implements IUserService {
     @Override
     public int updateUserInfo(UserInfo userInfo) {
         int row = userMapper.updateUserInfo(userInfo);
-        User user = new User();
         return row;
     }
 

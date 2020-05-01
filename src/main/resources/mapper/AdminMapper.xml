@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zzh.shortvideohub.mapper.AdminMapper">
+
+    <!-- 管理员登录 -->
+    <select id="checkAdmin" resultType="com.zzh.shortvideohub.pojo.Admin">
+        select id, user_name username, password
+        from sv_user where user_name = #{admin.username} and password = #{admin.password} and status = 2;
+    </select>
+
+    <!-- 取得用户列表 -->
+    <select id="getUserList" resultType="com.zzh.shortvideohub.pojo.UserInfo">
+        select ui.user_name userName, ui.user_id userId, ui.age age, ui.mobile_phone mobilePhone,
+            ui.user_avatar userAvatar, ui.sex sex, ui.area area, ui.introduction introduction,
+            ui.fans fans, ui.attentions attentions, su.status status, su.create_time createTime
+        from sv_user su
+        left join user_info ui on su.id = ui.user_id
+        where su.status &lt; 2
+        <if test="userInfo.userName != null and userInfo.userName != ''">
+            and ui.user_name like concat('%', #{userInfo.userName}, '%')
+        </if>
+    </select>
+
+    <!-- 取得视频列表 -->
+    <select id="getVideoList" resultType="com.zzh.shortvideohub.pojo.Video">
+         select v.id id, v.author_id authorId, u.user_name authorName, u.user_avatar authorAvatar,
+            v.create_time createTime, v.url url, v.cover cover, v.description description, v.likes likes,
+            v.duration duration, v.downloads downloads, v.comments comments, v.hot hot from video v
+        left join user_info u on v.author_id = u.user_id
+    </select>
+
+    <!-- 更改用户登录权限 -->
+    <update id="changeUserStatus">
+        update sv_user set status = (case when #{userInfo.status} then 1 else 0 end) where id = #{userInfo.userId};
+    </update>
+
+    <!-- 重置密码 -->
+    <update id="resetPass">
+        update sv_user set password = #{user.password} where id = #{user.id};
+    </update>
+
+    <!-- 删除用户账号 -->
+    <delete id="deleteUser">
+        delete from sv_user where id = #{userInfo.userId};
+    </delete>
+
+    <!-- 删除用户信息 -->
+    <delete id="deleteUserInfo">
+        delete from user_info where user_id = #{userInfo.userId};
+    </delete>
+
+    <!-- 删除用户视频 -->
+    <delete id="deleteUserVideo">
+        delete from video where author_id = #{userInfo.userId};
+    </delete>
+
+    <!-- 删除用户关注 -->
+    <delete id="deleteUserAttentions">
+        delete from attention_info where fans_id = #{userInfo.userId};
+    </delete>
+
+    <!-- 删除用户粉丝 -->
+    <delete id="deleteUserFans">
+        delete from attention_info where user_id = #{userInfo.userId};
+    </delete>
+
+    <!-- 删除用户 -->
+    <delete id="deleteUserReply">
+        delete from reply where reply_maker_id = #{userInfo.userId};
+    </delete>
+
+    <!-- 删除用户喜欢 -->
+    <delete id="deleteUserVideoLike">
+        delete from video_liker where liker = #{userInfo.userId};
+    </delete>
+</mapper>

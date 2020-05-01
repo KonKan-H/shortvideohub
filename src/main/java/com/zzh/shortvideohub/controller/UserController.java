@@ -158,14 +158,4 @@ public class UserController {
         List<UserInfo> userInfoList = userService.getAttentionsList(userInfo);
         return new Result<>(1, userInfoList, "操作成功");
     }
-
-    /**
-     * 管理员登录
-     * @param user
-     * @return
-     */
-    @RequestMapping(value = "/v1/admin/api", method = RequestMethod.POST)
-    public Boolean get(@RequestBody User user) {
-        return true;
-    }
 }

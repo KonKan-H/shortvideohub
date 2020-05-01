@@ -3,10 +3,13 @@ package com.zzh.shortvideohub.test;
 import com.alibaba.fastjson.JSONObject;
 import com.zzh.shortvideohub.constantCache.ConstantCache;
 import com.zzh.shortvideohub.mapper.UserMapper;
+import com.zzh.shortvideohub.pojo.Admin;
 import com.zzh.shortvideohub.pojo.User;
+import com.zzh.shortvideohub.pojo.UserInfo;
 import com.zzh.shortvideohub.service.UserService;
 import com.zzh.shortvideohub.service.VideoService;
 import com.zzh.shortvideohub.util.RedisService;
+import com.zzh.shortvideohub.util.Util;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +21,8 @@ import java.io.IOException;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.Arrays;
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -46,8 +51,9 @@ public class TestTest {
     @Test
     public void md5() throws NoSuchAlgorithmException {
         MessageDigest md5 = MessageDigest.getInstance("md5");
-        md5.update("123456".getBytes());
-        String result = new BigInteger(1, md5.digest()).toString(16);
+//        md5.update("123456".getBytes());
+//        String result = new BigInteger(1, md5.digest()).toString(16);
+        String result = Util.md5Encryption("admin");
         System.out.println(result);
     }
 
@@ -117,4 +123,27 @@ public class TestTest {
         videoService.videoHotSync();
     }
 
+    @Test
+    public void json() {
+        Admin admin = JSONObject.toJavaObject(JSONObject.parseObject(redisService.get("b6a54ffdcc8dfa88a3eb6aa74d60bc3c").toString()), Admin.class);
+        System.out.println();
+    }
+
+    @Test
+    public void test() {
+        Integer i01 = 59;
+        int i02 = 59;
+        Integer i03 =Integer.valueOf(59);
+        Integer i04 = new Integer(59);
+        System.out.println(i01 == i02);
+        System.out.println(i01 == i03);
+        System.out.println(i03 == i04);
+        System.out.println(i04 == i02);
+    }
+
+    @Test
+    public void t2() {
+        UserInfo userInfo = JSONObject.parseObject(JSONObject.parse(JSONObject.toJSONString(redisService.get("74"))).toString(), UserInfo.class);
+        System.out.println(JSONObject.toJSON(userInfo));
+    }
 }

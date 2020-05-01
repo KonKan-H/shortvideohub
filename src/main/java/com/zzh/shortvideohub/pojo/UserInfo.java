@@ -2,6 +2,8 @@ package com.zzh.shortvideohub.pojo;
 
 import lombok.Data;
 
+import java.util.Date;
+
 /**
  * @author zzh
  * @date 2020/3/7 16:09
@@ -20,4 +22,6 @@ public class UserInfo extends PageBase {
     private Integer fans;
     private Integer attentions;
     private String accessToken;
+    private boolean status;
+    private Date createTime;
 }

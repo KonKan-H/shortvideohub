@@ -21,6 +21,9 @@ fileUrl:
   coverFileUrl: "D:/sv_files/cover/"
   avatarFileUrl: "D:/sv_files/avatar/"
 
+initData:
+  password: "123456"
+
 task:
   fnsAttentionsNumUpdate:
     cron: "0 0 0 * * ? "

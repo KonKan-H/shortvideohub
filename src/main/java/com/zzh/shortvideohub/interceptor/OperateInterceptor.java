@@ -1,5 +1,7 @@
 package com.zzh.shortvideohub.interceptor;
 
+import com.alibaba.fastjson.JSONObject;
+import com.zzh.shortvideohub.pojo.Admin;
 import com.zzh.shortvideohub.util.RedisService;
 import lombok.extern.apachecommons.CommonsLog;
 import lombok.extern.slf4j.Slf4j;
@@ -35,7 +37,7 @@ public class OperateInterceptor implements HandlerInterceptor {
      */
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        //重header中取出token
+       //重header中取出token
         String token = request.getHeader("access_token");
         log.info("用户状态 {}", token);
 

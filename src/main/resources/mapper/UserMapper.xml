@@ -5,7 +5,7 @@
 <mapper namespace="com.zzh.shortvideohub.mapper.UserMapper">
     <!-- 根据手机号查询用户 -->
     <select id="getUserByMP" resultType="com.zzh.shortvideohub.pojo.User">
-        select * from sv_user where mobile_phone = #{user.mobilePhone};
+        select * from sv_user where mobile_phone = #{user.mobilePhone} and status = 1;
     </select>
 
     <!-- 注册用户 -->
@@ -21,9 +21,9 @@
 
     <!-- 创建默认用户信息 -->
     <insert id="insertUserInfo">
-        insert into user_info (user_id, user_name, mobile_phone, fans, attentions, age, sex)
+        insert into user_info (user_id, user_name, mobile_phone, fans, attentions, age, sex, user_avatar)
         values(#{userInfo.userId}, #{userInfo.userName}, #{userInfo.mobilePhone}, #{userInfo.fans},
-        #{userInfo.attentions}, #{userInfo.age}, #{userInfo.sex});
+        #{userInfo.attentions}, #{userInfo.age}, #{userInfo.sex}, #{userInfo.userAvatar});
     </insert>
 
     <!-- 取得用户具体信息 -->

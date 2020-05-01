@@ -1,5 +1,6 @@
 package com.zzh.shortvideohub.pojo;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 /**
