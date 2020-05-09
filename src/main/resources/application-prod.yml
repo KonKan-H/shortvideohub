@@ -21,6 +21,9 @@ fileUrl:
   coverFileUrl: "/var/opt/cover/"
   avatarFileUrl: "/var/opt/avatar/"
 
+initData:
+  password: "123456"
+
 task:
   fnsAttentionsNumUpdate:
     cron: "0 0 0 * * ? "

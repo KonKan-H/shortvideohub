@@ -27,8 +27,12 @@
     <select id="getVideoList" resultType="com.zzh.shortvideohub.pojo.Video">
          select v.id id, v.author_id authorId, u.user_name authorName, u.user_avatar authorAvatar,
             v.create_time createTime, v.url url, v.cover cover, v.description description, v.likes likes,
-            v.duration duration, v.downloads downloads, v.comments comments, v.hot hot from video v
+            v.duration duration, v.downloads downloads, v.comments comments, v.hot hot, v.status status from video v
         left join user_info u on v.author_id = u.user_id
+        where 1=1
+        <if test="video.authorName != null and video.authorName != ''">
+            and u.user_name like concat('%', #{video.authorName}, '%')
+        </if>
     </select>
 
     <!-- 更改用户登录权限 -->
@@ -75,4 +79,9 @@
     <delete id="deleteUserVideoLike">
         delete from video_liker where liker = #{userInfo.userId};
     </delete>
+
+    <!-- 更改视频状态 -->
+    <update id="changeVideoStatus">
+        update video set status = #{video.status} where id = #{video.id};
+    </update>
 </mapper>

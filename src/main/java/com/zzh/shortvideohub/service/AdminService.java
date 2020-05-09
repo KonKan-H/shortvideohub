@@ -1,5 +1,6 @@
 package com.zzh.shortvideohub.service;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -38,6 +39,12 @@ public class AdminService implements IAdminService {
     @Value("${initData.password}")
     private String initPassword;
 
+    @Value("${fileUrl.videoFileUrl}")
+    private String VIDEO_URL;
+
+    @Value("${fileUrl.coverFileUrl}")
+    private String COVER_URL;
+
     @Override
     public Admin adminLogin(Admin admin) throws NoSuchAlgorithmException {
         String passwordMD5 = Util.md5Encryption(admin.getPassword());
@@ -63,18 +70,18 @@ public class AdminService implements IAdminService {
 
     /**
      * 取得视频列表
-     * @param pageBase
+     * @param v
      * @return
      */
     @Override
-    public PageInfo<Video> getVideoList(PageBase pageBase) {
-        PageHelper.startPage(pageBase.getCurrentPage(), pageBase.getPageSize());
-        List<Video> videoList = adminMapper.getVideoList();
+    public PageInfo<Video> getVideoList(Video v) {
+        PageHelper.startPage(v.getCurrentPage(), v.getPageSize());
+        List<Video> videoList = adminMapper.getVideoList(v);
         for(Video video : videoList) {
-            video.setCover(ConstantCache.COVER_URL + video.getCover());
+            video.setCover(COVER_URL + video.getCover());
             String url = video.getUrl();
             url = url.substring(0, url.lastIndexOf(".")) + ".mp4";
-            video.setUrl(ConstantCache.VIDEO_URL + url);
+            video.setUrl(VIDEO_URL + url);
         }
         PageInfo<Video> pageInfo = new PageInfo<>(videoList);
         return pageInfo;
@@ -88,6 +95,22 @@ public class AdminService implements IAdminService {
     @Override
     public int changeUserStatus(UserInfo userInfo) {
         int row = adminMapper.changeUserStatus(userInfo);
+        if(redisService.exists(userInfo.getUserId().toString())) {
+            UserInfo u = JSONObject.parseObject(JSONObject.parse(JSONObject.toJSONString(redisService.get(userInfo.getUserId().toString()))).toString(), UserInfo.class);
+            redisService.remove(u.getUserId().toString());
+            redisService.remove(u.getAccessToken());
+        }
+        return row;
+    }
+
+    /**
+     * 更改视频权限
+     * @param video
+     * @return
+     */
+    @Override
+    public int changeVideoStatus(Video video) {
+        int row = adminMapper.changeVideoStatus(video);
         return row;
     }
 

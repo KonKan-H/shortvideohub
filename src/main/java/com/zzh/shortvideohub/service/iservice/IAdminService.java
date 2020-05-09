@@ -30,10 +30,10 @@ public interface IAdminService {
 
     /**
      * 取得视频列表
-     * @param pageBase
+     * @param video
      * @return
      */
-    PageInfo<Video> getVideoList(PageBase pageBase);
+    PageInfo<Video> getVideoList(Video video);
 
     /**
      * 更改用户登录权限
@@ -55,4 +55,11 @@ public interface IAdminService {
      * @return
      */
     boolean deleteUser(UserInfo userInfo);
+
+    /**
+     * 更改视频权限
+     * @param video
+     * @return
+     */
+    int changeVideoStatus(Video video);
 }

@@ -33,7 +33,7 @@ public interface AdminMapper {
      *
      * @return
      */
-    List<Video> getVideoList();
+    List<Video> getVideoList(@Param("video") Video video);
 
     /**
      * 更改用户登录权限
@@ -106,4 +106,11 @@ public interface AdminMapper {
      * @return
      */
     int deleteUserVideoLike(@Param("userInfo") UserInfo userInfo);
+
+    /**
+     * 更改视频状态
+     * @param video
+     * @return
+     */
+    int changeVideoStatus(@Param("video") Video video);
 }

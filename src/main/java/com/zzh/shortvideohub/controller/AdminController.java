@@ -54,13 +54,13 @@ public class AdminController {
 
     /**
      * 取得视频列表
-     * @param pageBase
+     * @param video
      * @return
      */
     @CrossOrigin
     @PostMapping(value = "/v1/admin/video/list/api")
-    public Result<PageInfo<Video>> getVideoList(@RequestBody PageBase pageBase) {
-        PageInfo<Video> pageInfo = adminService.getVideoList(pageBase);
+    public Result<PageInfo<Video>> getVideoList(@RequestBody Video video) {
+        PageInfo<Video> pageInfo = adminService.getVideoList(video);
         return new Result<>(1, pageInfo, "操作成功");
     }
 
@@ -88,6 +88,18 @@ public class AdminController {
     @PostMapping(value = "/v1/admin/user/status/api")
     public Result<Boolean> changeUserStatus(@RequestBody UserInfo userInfo) {
         int num = adminService.changeUserStatus(userInfo);
+        return new Result<>(1, num == 1 ? true : false, "操作成功");
+    }
+
+    /**
+     * 更改视频权限
+     * @param video
+     * @return
+     */
+    @CrossOrigin
+    @PostMapping(value = "/v1/admin/video/status/api")
+    public Result<Boolean> changeVideoStatus(@RequestBody Video video) {
+        int num = adminService.changeVideoStatus(video);
         return new Result<>(1, num == 1 ? true : false, "操作成功");
     }
 

@@ -8,12 +8,14 @@
     <select id="getInitVideoList" resultType="com.zzh.shortvideohub.pojo.Video">
         SELECT v.id id, v.author_id authorId, u.user_name authorName, u.user_avatar authorAvatar,
             v.create_time createTime, v.url url, v.cover cover, v.description description, v.likes likes,
-            v.duration duration, v.downloads downloads, v.comments comments from video v
+            v.duration duration, v.downloads downloads, v.comments comments, v.status status from video v
         LEFT JOIN user_info u on u.user_id = v.author_id
+        where 1=1
+        <if test="userInfo.userId == null">
+            and v.status = 1
+        </if>
         <if test="userInfo.userId != null">
-            <where>
-                author_id = #{userInfo.userId}
-            </where>
+            and author_id = #{userInfo.userId}
         </if>
         order by create_time desc
     </select>
@@ -55,9 +57,9 @@
     <select id="getFavoriteVideo" resultType="com.zzh.shortvideohub.pojo.Video">
         select v.id id, v.author_id authorId, u.user_name authorName, u.user_avatar authorAvatar,
             v.create_time createTime, v.url url, v.cover cover, v.description description, v.likes likes,
-            v.duration duration, v.downloads downloads, v.comments comments from video v
+            v.duration duration, v.downloads downloads, v.comments comments, v.status status from video v
         left join user_info u on v.author_id = u.user_id
-        where v.id in (select video_liker.video_id from video_liker where video_liker.liker = #{userInfo.userId})
+        where v.status = 1 and v.id in (select video_liker.video_id from video_liker where video_liker.liker = #{userInfo.userId})
         order by v.create_time desc;
     </select>
 
@@ -67,15 +69,15 @@
             v.create_time createTime, v.url url, v.cover cover, v.description description, v.likes likes,
             v.duration duration, v.downloads downloads, v.comments comments from video v
         left join user_info u on v.author_id = u.user_id
-        where v.author_id in (select attention_info.user_id from attention_info where attention_info.fans_id = #{userInfo.userId})
+        where v.status = 1 and v.author_id in (select attention_info.user_id from attention_info where attention_info.fans_id = #{userInfo.userId})
         order by v.create_time desc
     </select>
 
     <!-- 插入视频 -->
     <insert id="insertVideo">
-        insert into video (author_id, create_time, url, cover, description, likes, downloads, comments)
+        insert into video (author_id, create_time, url, cover, description, likes, downloads, comments, status)
         VALUES (#{video.authorId}, #{video.createTime}, #{video.url}, #{video.cover}, #{video.description},
-        #{video.likes}, #{video.downloads}, #{video.comments});
+        #{video.likes}, #{video.downloads}, #{video.comments}, #{video.status});
     </insert>
 
     <!-- 删除视频所有喜欢 -->
@@ -93,9 +95,9 @@
         update video set comments = comments - 1 where id = #{videoId};
     </update>
 
-    <!-- 取得所有的视频 -->
+    <!-- 取得所有的视频 同步任务 -->
     <select id="getAllVideos" resultType="com.zzh.shortvideohub.pojo.Video">
-        select * from video;
+        select * from video where status = 1;
     </select>
 
     <!-- 同步视频的点赞数 -->
@@ -127,6 +129,7 @@
             v.create_time createTime, v.url url, v.cover cover, v.description description, v.likes likes,
             v.duration duration, v.downloads downloads, v.comments comments from video v
         left join user_info u on v.author_id = u.user_id
+        where v.status = 1
         order by hot desc
     </select>
 </mapper>

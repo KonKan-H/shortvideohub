@@ -123,6 +123,7 @@ public class FileService implements IFileService {
         video.setLikes(0);
         video.setDownloads(0);
         video.setComments(0);
+        video.setStatus(1);
         return video;
     }
 

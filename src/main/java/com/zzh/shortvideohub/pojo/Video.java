@@ -53,4 +53,9 @@ public class Video extends PageBase {
      * 热度
      */
     private Integer hot;
+
+    /**
+     * 状态 1为正常，0为封禁视频
+     */
+    private Integer status;
 }

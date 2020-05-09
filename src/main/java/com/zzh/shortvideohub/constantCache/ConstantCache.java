@@ -13,8 +13,8 @@ public class ConstantCache {
 //    public static String VIDEO_FILE_URI = FILE_URL + "video/";
 //    public static String AVATAR_FILE_URI = FILE_URL + "avatar/";
 
-    public static String VIDEO_URL = "http://112.126.82.137:8080/video/";
-    public static String COVER_URL = "http://112.126.82.137:8080/cover/";
+//    public static String VIDEO_URL = "http://112.126.82.137:8080/video/";
+//    public static String COVER_URL = "http://112.126.82.137:8080/cover/";
 
     public static String INIT_AVATAR = "ic_avatar_default.png";
 
