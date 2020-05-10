@@ -62,4 +62,11 @@ public interface IAdminService {
      * @return
      */
     int changeVideoStatus(Video video);
+
+    /**
+     * 查询待审核视频
+     * @param video
+     * @return
+     */
+    PageInfo<Video> getCheckVideo(Video video);
 }

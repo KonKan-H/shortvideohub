@@ -109,8 +109,16 @@ public interface AdminMapper {
 
     /**
      * 更改视频状态
+     *
      * @param video
      * @return
      */
     int changeVideoStatus(@Param("video") Video video);
+
+    /**
+     * 查询待审核视频
+     * @param video
+     * @return
+     */
+    List<Video> getCheckVideo(@Param("video") Video video);
 }

@@ -77,12 +77,21 @@ public class AdminService implements IAdminService {
     public PageInfo<Video> getVideoList(Video v) {
         PageHelper.startPage(v.getCurrentPage(), v.getPageSize());
         List<Video> videoList = adminMapper.getVideoList(v);
-        for(Video video : videoList) {
-            video.setCover(COVER_URL + video.getCover());
-            String url = video.getUrl();
-            url = url.substring(0, url.lastIndexOf(".")) + ".mp4";
-            video.setUrl(VIDEO_URL + url);
-        }
+        setVideoParam(videoList);
+        PageInfo<Video> pageInfo = new PageInfo<>(videoList);
+        return pageInfo;
+    }
+
+    /**
+     * 查询待审核视频
+     * @param video
+     * @return
+     */
+    @Override
+    public PageInfo<Video> getCheckVideo(Video video) {
+        PageHelper.startPage(video.getCurrentPage(), video.getPageSize());
+        List<Video> videoList = adminMapper.getCheckVideo(video);
+        setVideoParam(videoList);
         PageInfo<Video> pageInfo = new PageInfo<>(videoList);
         return pageInfo;
     }
@@ -154,6 +163,15 @@ public class AdminService implements IAdminService {
             return false;
         }
         return true;
+    }
+
+    private void setVideoParam(List<Video> videoList) {
+        for(Video video : videoList) {
+            video.setCover(COVER_URL + video.getCover());
+            String url = video.getUrl();
+            url = url.substring(0, url.lastIndexOf(".")) + ".mp4";
+            video.setUrl(VIDEO_URL + url);
+        }
     }
 
     /**

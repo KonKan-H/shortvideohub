@@ -29,7 +29,7 @@
             v.create_time createTime, v.url url, v.cover cover, v.description description, v.likes likes,
             v.duration duration, v.downloads downloads, v.comments comments, v.hot hot, v.status status from video v
         left join user_info u on v.author_id = u.user_id
-        where 1=1
+        where 1=1 and v.status != 2
         <if test="video.authorName != null and video.authorName != ''">
             and u.user_name like concat('%', #{video.authorName}, '%')
         </if>
@@ -84,4 +84,16 @@
     <update id="changeVideoStatus">
         update video set status = #{video.status} where id = #{video.id};
     </update>
+
+    <!-- 查询待审核视频 -->
+    <select id="getCheckVideo" resultType="com.zzh.shortvideohub.pojo.Video">
+        select v.id id, v.author_id authorId, u.user_name authorName, u.user_avatar authorAvatar,
+        v.create_time createTime, v.url url, v.cover cover, v.description description, v.likes likes,
+        v.duration duration, v.downloads downloads, v.comments comments, v.hot hot, v.status status from video v
+        left join user_info u on v.author_id = u.user_id
+        where 1=1 and v.status = 2
+        <if test="video.authorName != null and video.authorName != ''">
+            and u.user_name like concat('%', #{video.authorName}, '%')
+        </if>
+    </select>
 </mapper>

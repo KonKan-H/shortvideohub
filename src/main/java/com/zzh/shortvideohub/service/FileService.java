@@ -123,7 +123,8 @@ public class FileService implements IFileService {
         video.setLikes(0);
         video.setDownloads(0);
         video.setComments(0);
-        video.setStatus(1);
+        //0为审核通过，1为审核不通过，2为审核中
+        video.setStatus(2);
         return video;
     }
 

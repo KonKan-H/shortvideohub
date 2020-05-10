@@ -65,6 +65,18 @@ public class AdminController {
     }
 
     /**
+     * 查询待审核视频
+     * @param video
+     * @return
+     */
+    @CrossOrigin
+    @PostMapping(value = "/v1/admin/video/check/api")
+    public Result<PageInfo<Video>> getCheckVideo(@RequestBody Video video) {
+        PageInfo<Video> pageInfo = adminService.getCheckVideo(video);
+        return new Result<>(1, pageInfo, "操作成功");
+    }
+
+    /**
      * 管理员删除视频
      * @param video
      * @return
