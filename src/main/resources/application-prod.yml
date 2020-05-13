@@ -21,6 +21,9 @@ fileUrl:
   coverFileUrl: "/var/opt/cover/"
   avatarFileUrl: "/var/opt/avatar/"
 
+VideoFileUrl: "http://112.126.82.137:8080/video/"
+CoverFileUrl: "http://112.126.82.137:8080/cover/"
+
 initData:
   password: "123456"
 

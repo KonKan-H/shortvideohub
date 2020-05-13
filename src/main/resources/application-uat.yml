@@ -21,6 +21,9 @@ fileUrl:
   coverFileUrl: "D:/sv_files/cover/"
   avatarFileUrl: "D:/sv_files/avatar/"
 
+VideoFileUrl: "D:/sv_files/video/"
+CoverFileUrl: "D:/sv_files/cover/"
+
 initData:
   password: "123456"
 

@@ -39,10 +39,10 @@ public class AdminService implements IAdminService {
     @Value("${initData.password}")
     private String initPassword;
 
-    @Value("${fileUrl.videoFileUrl}")
+    @Value("${VideoFileUrl}")
     private String VIDEO_URL;
 
-    @Value("${fileUrl.coverFileUrl}")
+    @Value("${CoverFileUrl}")
     private String COVER_URL;
 
     @Override
