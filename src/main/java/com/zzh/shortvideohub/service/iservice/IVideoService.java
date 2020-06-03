@@ -77,4 +77,11 @@ public interface IVideoService {
      * @return
      */
     PageInfo<Video> getHotVideo(PageBase pageBase);
+
+    /**
+     * 取得用户视频
+     * @param userInfo
+     * @return
+     */
+    PageInfo<Video> getUserVideoList(UserInfo userInfo);
 }

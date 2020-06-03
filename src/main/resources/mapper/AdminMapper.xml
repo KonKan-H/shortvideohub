@@ -16,7 +16,7 @@
             ui.user_avatar userAvatar, ui.sex sex, ui.area area, ui.introduction introduction,
             ui.fans fans, ui.attentions attentions, su.status status, su.create_time createTime
         from sv_user su
-        left join user_info ui on su.id = ui.user_id
+        left join user_info ui on su.   id = ui.user_id
         where su.status &lt; 2
         <if test="userInfo.userName != null and userInfo.userName != ''">
             and ui.user_name like concat('%', #{userInfo.userName}, '%')

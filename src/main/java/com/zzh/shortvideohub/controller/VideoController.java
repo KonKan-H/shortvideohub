@@ -36,6 +36,20 @@ public class VideoController {
     }
 
     /**
+     * 取得用户视频
+     * @param userInfo
+     * @return
+     */
+    @PostMapping(value = "/v1/video/user/api")
+    public Result<PageInfo<Video>> getUserVideo(@RequestBody UserInfo userInfo) {
+        PageInfo<Video> videoList = videoService.getUserVideoList(userInfo);
+        if(videoList == null || videoList.getList().size() ==0) {
+            return new Result<>(0, null, "视频为空");
+        }
+        return new Result<PageInfo<Video>>(1, videoList, "为您推荐" + videoList.getList().size() + "条视频");
+    }
+
+    /**
      * 更新视频喜欢数
      * @param data
      * @return

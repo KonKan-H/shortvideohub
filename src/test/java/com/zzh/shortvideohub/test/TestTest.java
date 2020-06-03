@@ -1,6 +1,5 @@
 package com.zzh.shortvideohub.test;
 
-import com.alibaba.fastjson.JSONObject;
 import com.zzh.shortvideohub.constantCache.ConstantCache;
 import com.zzh.shortvideohub.mapper.UserMapper;
 import com.zzh.shortvideohub.pojo.Admin;
@@ -16,14 +15,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
-
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import java.io.IOException;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.Arrays;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * @author zzh
@@ -145,5 +143,11 @@ public class TestTest {
     public void t2() {
         UserInfo userInfo = JSONObject.parseObject(JSONObject.parse(JSONObject.toJSONString(redisService.get("74"))).toString(), UserInfo.class);
         System.out.println(JSONObject.toJSON(userInfo));
+    }
+
+    @Test
+    public void t3() {
+        char a = 'a';
+        System.out.println(a ^ 32);
     }
 }

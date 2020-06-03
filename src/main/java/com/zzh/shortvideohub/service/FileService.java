@@ -149,7 +149,7 @@ public class FileService implements IFileService {
         try {
             Process p = Runtime.getRuntime().exec(ml);
         } catch (IOException e1) {
-            log.info("切片失败: " + ml);
+            log.info("切取失败: " + ml);
             e1.printStackTrace();
         }
         log.info("切取封面成功: " + ml);

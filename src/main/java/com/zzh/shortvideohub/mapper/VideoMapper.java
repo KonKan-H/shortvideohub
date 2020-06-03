@@ -23,6 +23,13 @@ public interface VideoMapper {
     List<Video> getInitVideoList(@Param("userInfo") UserInfo userInfo);
 
     /**
+     * 取得用户视频
+     * @param userInfo
+     * @return
+     */
+    List<Video> getUserVideoList(@Param("userInfo") UserInfo userInfo);
+
+    /**
      * 更新视频信息
      *
      * @param video
@@ -131,14 +138,17 @@ public interface VideoMapper {
 
     /**
      * 视频热度
+     *
      * @param videos
      */
     void videoHotUpdate(@Param("videos") List<Video> videos);
 
     /**
      * 取得热门视频
+     *
      * @return
      */
     List<Video> getHotVideo();
+
 
 }

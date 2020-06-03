@@ -48,6 +48,22 @@ public class VideoService implements IVideoService {
     }
 
     /**
+     * 取得用户视频
+     * @param userInfo
+     * @return
+     */
+    @Override
+    public PageInfo<Video> getUserVideoList(UserInfo userInfo) {
+        PageHelper.startPage(userInfo.getCurrentPage(), userInfo.getPageSize());
+        List<Video> videoList = videoMapper.getUserVideoList(userInfo);
+        PageInfo<Video> pageInfo = new PageInfo<>(videoList);
+        if(userInfo.getCurrentPage() > pageInfo.getPages()) {
+            pageInfo = null;
+        }
+        return pageInfo;
+    }
+
+    /**
      * 点赞
      * @param data
      * @return
