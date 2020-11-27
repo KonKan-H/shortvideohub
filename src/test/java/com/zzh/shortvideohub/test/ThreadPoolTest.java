@@ -37,6 +37,7 @@ public class ThreadPoolTest {
     @Test
     public void singleThreadPool() {
         ExecutorService threadPool = Executors.newSingleThreadExecutor();
+
         try {
             for (int i = 0; i < 10; i++) {
                 threadPool.execute(() -> {
